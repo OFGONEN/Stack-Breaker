@@ -518,6 +518,11 @@ namespace ElephantSdkManager
                         sdkName = "ByteDance";
                     }
 
+                    if (sdk.sdkName.Contains("Ogury"))
+                    {
+                        sdkName = "OguryPresage";
+                    }
+
                     var dependencyPath = "MaxSdk/Mediation/" + sdkName + "/Editor/Dependencies.xml";
                     var currentVersion = VersionUtils.GetCurrentVersions(Path.Combine(AssetsPathPrefix, dependencyPath))
                         .Unity;
