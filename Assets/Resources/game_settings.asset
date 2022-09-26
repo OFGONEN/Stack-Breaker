@@ -18,6 +18,7 @@ MonoBehaviour:
   player_jump_duration: 0.25
   player_jump_ease: 1
   player_fall_speed: 1
+  player_step_height: 1
   player_input_activation_delay: 0.25
   camera_follow_speed_depth: 2.8
   maxLevelCount: 1

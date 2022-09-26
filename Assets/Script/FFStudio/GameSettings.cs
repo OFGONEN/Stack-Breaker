@@ -18,7 +18,8 @@ namespace FFStudio
         [ LabelText( "Player Jump Duration" ) ] public float player_jump_duration = 1f;
         [ LabelText( "Player Jump Ease" ) ] public Ease player_jump_ease = Ease.Linear;
         [ LabelText( "Player Fall Speed" ) ] public float player_fall_speed = 1f;
-        [ LabelText( "Player On Level Start Input Activation Delay" ) ] public float player_input_activation_delay = 0.5f;
+        [ LabelText( "Player Step Height" ) ] public float player_step_height = 0.5f;
+        [ LabelText( "Player Input Activation Delay" ) ] public float player_input_activation_delay = 0.5f;
     
     [ Title( "Camera" ) ]
         [ LabelText( "Follow Speed (Z)" ), SuffixLabel( "units/seconds" ), Min( 0 ) ] public float camera_follow_speed_depth = 2.8f;
