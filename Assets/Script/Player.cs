@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     UnityMessage onUpdateMethod;
     UnityMessage onFixedUpdateMethod;
     UnityMessage onInputFingerDown;
-    UnityMessage onInputFingerUp;
 
 	RecycledTween recycledTween = new RecycledTween();
 #endregion
@@ -35,7 +34,6 @@ public class Player : MonoBehaviour
 		onUpdateMethod      = ExtensionMethods.EmptyMethod;
 		onFixedUpdateMethod = ExtensionMethods.EmptyMethod;
 		onInputFingerDown   = ExtensionMethods.EmptyMethod;
-		onInputFingerUp     = ExtensionMethods.EmptyMethod;
 
 		_collider.enabled = false;
 
@@ -59,18 +57,12 @@ public class Player : MonoBehaviour
 		current_position = transform.position.y;
 		onUpdateMethod   = RotateAroundOrigin;
 
-		// Activate input via delay
-		DOVirtual.DelayedCall( GameSettings.Instance.player_input_activation_delay, () => onInputFingerDown = Jump );
+		ActivateInputWithDelay();
 	}
 
 	public void OnInputFingerDown()
 	{
 		onInputFingerDown();
-	}
-
-	public void OnInputFingerUp()
-	{
-		onInputFingerUp();
 	}
 
 	public void OnTrigger_Ground()
@@ -79,10 +71,13 @@ public class Player : MonoBehaviour
 		onUpdateMethod      = RotateAroundOrigin;
 
 		transform.position = transform.position.SetY( current_position );
+
+		ActivateInputWithDelay();
 	}
 
 	public void OnTrigger_Break()
 	{
+		current_position -= GameSettings.Instance.player_step_height;
 	}
 #endregion
 
@@ -121,6 +116,11 @@ public class Player : MonoBehaviour
 		var rotatePoint = Vector3.up * position.y;
 
 		transform.RotateAround( rotatePoint, Vector3.up, Time.deltaTime * GameSettings.Instance.player_rotation_speed * jump_speed_cofactor );
+	}
+
+	void ActivateInputWithDelay()
+	{
+		DOVirtual.DelayedCall( GameSettings.Instance.player_input_activation_delay, () => onInputFingerDown = Jump );
 	}
 #endregion
 
