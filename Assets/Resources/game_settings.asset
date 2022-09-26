@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a385bd3b4416492409284c9a366cb52a, type: 3}
   m_Name: game_settings
   m_EditorClassIdentifier: 
-  player_movement_rotation_speed: -100
+  player_rotation_speed: -100
+  player_movement_rotate_cofactor_jumping: 0.5
+  player_jump_height: 0.35
+  player_jump_duration: 0.25
+  player_jump_ease: 1
+  player_input_activation_delay: 0.25
   camera_follow_speed_depth: 2.8
   maxLevelCount: 1
   useRemoteConfig_GameSettings: 0

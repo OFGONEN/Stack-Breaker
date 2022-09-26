@@ -12,7 +12,12 @@ namespace FFStudio
     // Info: You can use Title() attribute ONCE for every game-specific group of settings.
 
     [ Title( "Player" ) ]
-        [ LabelText( "Player Rotation Speed" ) ] public float player_movement_rotation_speed = 1f;
+        [ LabelText( "Player Rotation Speed" ) ] public float player_rotation_speed = 1f;
+        [ LabelText( "Player Rotation Speed Cofactor While Jumping" ) ] public float player_movement_rotate_cofactor_jumping = 1f;
+        [ LabelText( "Player Jump Height" ) ] public float player_jump_height = 1f;
+        [ LabelText( "Player Jump Duration" ) ] public float player_jump_duration = 1f;
+        [ LabelText( "Player Jump Ease" ) ] public Ease player_jump_ease = Ease.Linear;
+        [ LabelText( "Player On Level Start Input Activation Delay" ) ] public float player_input_activation_delay = 0.5f;
     
     [ Title( "Camera" ) ]
         [ LabelText( "Follow Speed (Z)" ), SuffixLabel( "units/seconds" ), Min( 0 ) ] public float camera_follow_speed_depth = 2.8f;
