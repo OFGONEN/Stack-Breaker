@@ -72,6 +72,18 @@ public class Player : MonoBehaviour
 	{
 		onInputFingerUp();
 	}
+
+	public void OnTrigger_Ground()
+	{
+		onFixedUpdateMethod = ExtensionMethods.EmptyMethod;
+		onUpdateMethod      = RotateAroundOrigin;
+
+		transform.position = transform.position.SetY( current_position );
+	}
+
+	public void OnTrigger_Break()
+	{
+	}
 #endregion
 
 #region Implementation
