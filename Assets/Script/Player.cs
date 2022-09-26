@@ -12,9 +12,11 @@ public class Player : MonoBehaviour
 #region Fields
   [ Title( "Components" ) ]
     [ SerializeField ] Rigidbody _rigidBody;
+    [ SerializeField ] Collider _collider;
 
 // Private
 	float jump_speed_cofactor = 1f;
+	float current_position    = 0;
 
     UnityMessage onUpdateMethod;
     UnityMessage onFixedUpdateMethod;
@@ -35,6 +37,8 @@ public class Player : MonoBehaviour
 		onInputFingerDown   = ExtensionMethods.EmptyMethod;
 		onInputFingerUp     = ExtensionMethods.EmptyMethod;
 
+		_collider.enabled = false;
+
 		OnLevelStartMethod();
 	}
 
@@ -52,7 +56,8 @@ public class Player : MonoBehaviour
 #region API
     public void OnLevelStartMethod()
     {
-		onUpdateMethod = RotateAroundOrigin;
+		current_position = transform.position.y;
+		onUpdateMethod   = RotateAroundOrigin;
 
 		// Activate input via delay
 		DOVirtual.DelayedCall( GameSettings.Instance.player_input_activation_delay, () => onInputFingerDown = Jump );
@@ -83,10 +88,19 @@ public class Player : MonoBehaviour
 		);
 	}
 
+	void FallDown()
+	{
+		var position = transform.position;
+		_rigidBody.MovePosition( position + Vector3.down * GameSettings.Instance.player_fall_speed * Time.fixedDeltaTime );
+	}
+
 	void OnJumpComplete()
 	{
-		onUpdateMethod = ExtensionMethods.EmptyMethod;
+		onUpdateMethod      = ExtensionMethods.EmptyMethod;
+		onFixedUpdateMethod = FallDown;
+
 		jump_speed_cofactor = 1f;
+		_collider.enabled   = true;
 	}
 
 	void RotateAroundOrigin()
