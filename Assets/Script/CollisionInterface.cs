@@ -32,7 +32,7 @@ public class CollisionInterface : MonoBehaviour
 		int index;
 
 		if( collision_respond_data_dictionary.TryGetValue( collider.gameObject.layer, out index ) )
-			collision_respond_data_array[ index ].collision_event.Invoke();
+			collision_respond_data_array[ index ].collision_event.Invoke( collider );
 	}
 #endregion
 

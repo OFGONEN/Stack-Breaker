@@ -145,7 +145,7 @@ namespace FFStudio
 	public struct CollisionRespondData
 	{
 		[ Layer() ] public int collision_layer;
-		public UnityEvent collision_event;
+		public UnityEvent< Collider > collision_event;
 	}
 
 }
