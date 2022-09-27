@@ -10,6 +10,12 @@ using Sirenix.OdinInspector;
 public class Player : MonoBehaviour
 {
 #region Fields
+  [ Title( "Shared" ) ]
+	[ SerializeField ] SharedBoolNotifier notif_input_finger_isPressing;
+	[ SerializeField ] SharedIntNotifier notif_player_width;
+  [ Title( "Fired Events" ) ]
+	[ SerializeField ] GameEvent event_level_failed;
+
   [ Title( "Components" ) ]
     [ SerializeField ] Rigidbody _rigidBody;
     [ SerializeField ] Collider _collider;
@@ -17,6 +23,7 @@ public class Player : MonoBehaviour
 // Private
 	float jump_speed_cofactor = 1f;
 	float current_position    = 0;
+	bool  jump_collided_break = false;
 
     UnityMessage onUpdateMethod;
     UnityMessage onFixedUpdateMethod;
@@ -37,6 +44,8 @@ public class Player : MonoBehaviour
 
 		_collider.enabled = false;
 
+		notif_player_width.SetValue_NotifyAlways( 1 );
+
 		OnLevelStartMethod();
 	}
 
@@ -55,9 +64,7 @@ public class Player : MonoBehaviour
     public void OnLevelStartMethod()
     {
 		current_position = transform.position.y;
-		onUpdateMethod   = RotateAroundOrigin;
-
-		ActivateInputWithDelay();
+		StartMovement();
 	}
 
 	public void OnInputFingerDown()
@@ -65,19 +72,45 @@ public class Player : MonoBehaviour
 		onInputFingerDown();
 	}
 
-	public void OnTrigger_Ground()
+	public void OnPlayerGainedWeight( IntGameEvent gameEvent )
 	{
-		onFixedUpdateMethod = ExtensionMethods.EmptyMethod;
-		onUpdateMethod      = RotateAroundOrigin;
-
-		transform.position = transform.position.SetY( current_position );
-
-		ActivateInputWithDelay();
+		IncreasePlayerWidth( gameEvent.eventValue );
 	}
 
-	public void OnTrigger_Break()
+	public void OnTrigger_Ground()
 	{
-		current_position -= GameSettings.Instance.player_step_height;
+		if( notif_input_finger_isPressing.sharedValue && !jump_collided_break )
+		{
+			DecreasePlayerWidth( 1 );
+
+			if( notif_player_width.sharedValue > 0 )
+				StartMovement();
+			else
+				event_level_failed.Raise();
+		}
+		else
+			StartMovement();
+
+		// FFLogger.PopUpText( transform.position + Vector3.up, "Ground Trigger" );
+	}
+
+	public void OnTrigger_Break( Collider collider )
+	{
+		// FFLogger.PopUpText( transform.position + Vector3.up, "Break Trigger" );
+		if( notif_input_finger_isPressing.sharedValue )
+		{
+			DecreasePlayerWidth( 1 );
+
+			if( notif_player_width.sharedValue <= 0 )
+				event_level_failed.Raise();
+			else
+			{
+				current_position -= GameSettings.Instance.player_step_height;
+				//todo collider.GetComponent< Break >.Break();
+			}
+		}
+		else
+			StartMovement();
 	}
 #endregion
 
@@ -85,6 +118,9 @@ public class Player : MonoBehaviour
 	[ Button() ]
 	void Jump()
 	{
+		onInputFingerDown = ExtensionMethods.EmptyMethod;
+
+		jump_collided_break = false;
 		jump_speed_cofactor = GameSettings.Instance.player_movement_rotate_cofactor_jumping;
 
 		recycledTween.Recycle( transform.DOMoveY( GameSettings.Instance.player_jump_height,
@@ -95,10 +131,29 @@ public class Player : MonoBehaviour
 		);
 	}
 
+	void StartMovement()
+	{
+		onFixedUpdateMethod = ExtensionMethods.EmptyMethod;  // Stop falling down no matter what
+		onUpdateMethod      = RotateAroundOrigin; // Contiunue movement on a stack
+
+		_collider.enabled  = false;
+		transform.position = transform.position.SetY( current_position );
+
+		DOVirtual.DelayedCall( GameSettings.Instance.player_input_activation_delay, SetFingerDownToJump );
+	}
+
 	void FallDown()
 	{
 		var position = transform.position;
 		_rigidBody.MovePosition( position + Vector3.down * GameSettings.Instance.player_fall_speed * Time.fixedDeltaTime );
+	}
+
+	void RotateAroundOrigin()
+	{
+		var position    = transform.position;
+		var rotatePoint = Vector3.up * position.y;
+
+		transform.RotateAround( rotatePoint, Vector3.up, Time.deltaTime * GameSettings.Instance.player_rotation_speed * jump_speed_cofactor );
 	}
 
 	void OnJumpComplete()
@@ -110,17 +165,9 @@ public class Player : MonoBehaviour
 		_collider.enabled   = true;
 	}
 
-	void RotateAroundOrigin()
+	void SetFingerDownToJump()
 	{
-		var position    = transform.position;
-		var rotatePoint = Vector3.up * position.y;
-
-		transform.RotateAround( rotatePoint, Vector3.up, Time.deltaTime * GameSettings.Instance.player_rotation_speed * jump_speed_cofactor );
-	}
-
-	void ActivateInputWithDelay()
-	{
-		DOVirtual.DelayedCall( GameSettings.Instance.player_input_activation_delay, () => onInputFingerDown = Jump );
+		onInputFingerDown = Jump;
 	}
 #endregion
 
