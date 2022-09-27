@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 #region Fields
   [ Title( "Shared" ) ]
 	[ SerializeField ] SharedBoolNotifier notif_input_finger_isPressing;
-	[ SerializeField ] SharedIntNotifier notif_player_width;
+	[ SerializeField ] SharedFloatNotifier notif_player_width;
   [ Title( "Fired Events" ) ]
 	[ SerializeField ] GameEvent event_level_failed;
 
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
 		_collider.enabled = false;
 
-		notif_player_width.SetValue_NotifyAlways( 1 );
+		notif_player_width.SetValue_NotifyAlways( CurrentLevelData.Instance.levelData.player_width_ratio );
 
 		OnLevelStartMethod();
 	}
