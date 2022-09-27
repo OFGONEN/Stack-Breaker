@@ -115,6 +115,16 @@ public class Player : MonoBehaviour
 #endregion
 
 #region Implementation
+	void IncreasePlayerWidth( int value )
+	{
+		notif_player_width.SharedValue += value;
+	}
+
+	void DecreasePlayerWidth( int value )
+	{
+		notif_player_width.SharedValue -= value;
+	}
+
 	[ Button() ]
 	void Jump()
 	{
