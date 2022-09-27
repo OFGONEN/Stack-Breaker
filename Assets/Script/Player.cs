@@ -43,10 +43,11 @@ public class Player : MonoBehaviour
 		onInputFingerDown   = ExtensionMethods.EmptyMethod;
 
 		_collider.enabled = false;
+	}
 
+	private void Start()
+	{
 		notif_player_width.SetValue_NotifyAlways( CurrentLevelData.Instance.levelData.player_width_ratio );
-
-		OnLevelStartMethod();
 	}
 
     private void Update()
@@ -74,14 +75,14 @@ public class Player : MonoBehaviour
 
 	public void OnPlayerGainedWeight( IntGameEvent gameEvent )
 	{
-		IncreasePlayerWidth( gameEvent.eventValue );
+		IncreasePlayerWidth( gameEvent.eventValue * CurrentLevelData.Instance.levelData.collectable_cofactor );
 	}
 
 	public void OnTrigger_Ground()
 	{
 		if( notif_input_finger_isPressing.sharedValue && !jump_collided_break )
 		{
-			DecreasePlayerWidth( 1 );
+			DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
 
 			if( notif_player_width.sharedValue > 0 )
 				StartMovement();
@@ -99,7 +100,7 @@ public class Player : MonoBehaviour
 		// FFLogger.PopUpText( transform.position + Vector3.up, "Break Trigger" );
 		if( notif_input_finger_isPressing.sharedValue )
 		{
-			DecreasePlayerWidth( 1 );
+			DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
 
 			if( notif_player_width.sharedValue <= 0 )
 				event_level_failed.Raise();
