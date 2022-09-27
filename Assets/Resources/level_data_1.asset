@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene_index: 1
   scene_overrideAsActiveScene: 0
+  player_width_ratio: 0
+  collectable_cofactor: 0.1
+  break_cofactor: 0.25

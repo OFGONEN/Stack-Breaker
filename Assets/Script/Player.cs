@@ -41,6 +41,12 @@ public class Player : MonoBehaviour
 #endregion
 
 #region Unity API
+	private void OnDisable()
+	{
+		recycledTween.Kill();
+		recycledTween_PlayerPunchScale.Kill();
+	}
+
     private void Awake()
     {
 		onUpdateMethod      = ExtensionMethods.EmptyMethod;
@@ -53,6 +59,7 @@ public class Player : MonoBehaviour
 	private void Start()
 	{
 		notif_player_width.SetValue_NotifyAlways( CurrentLevelData.Instance.levelData.player_width_ratio );
+		UpdatePlayerWidth();
 	}
 
     private void Update()
@@ -107,9 +114,10 @@ public class Player : MonoBehaviour
 		if( notif_input_finger_isPressing.sharedValue )
 		{
 			DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
+			collider.gameObject.SetActive( false );
 
 			if( notif_player_width.sharedValue <= 0 )
-				event_level_failed.Raise();
+				LevelFailed();
 			else
 			{
 				current_position -= GameSettings.Instance.player_step_height;
@@ -215,6 +223,19 @@ public class Player : MonoBehaviour
 	void SetFingerDownToJump()
 	{
 		onInputFingerDown = Jump;
+	}
+
+	void LevelFailed()
+	{
+		onUpdateMethod      = ExtensionMethods.EmptyMethod;
+		onFixedUpdateMethod = ExtensionMethods.EmptyMethod;
+		onInputFingerDown   = ExtensionMethods.EmptyMethod;
+
+		// disable gfx object
+		// raise player death pfx
+
+
+		event_level_failed.Raise();
 	}
 #endregion
 

@@ -15,6 +15,10 @@ MonoBehaviour:
   player_step_height: 1
   player_input_activation_delay: 0.25
   player_width_range: {x: 0.2, y: 2}
+  player_punch_vector: {x: 1, y: 1, z: 1}
+  player_punch_power: 1
+  player_punch_duraion: 0.35
+  player_punch_ease: 1
   player_rotation_speed: -100
   player_movement_rotate_cofactor_jumping: 0.5
   player_jump_height: 0.35
