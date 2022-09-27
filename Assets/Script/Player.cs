@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 	[ SerializeField ] SharedFloatNotifier notif_player_width;
 
   [ Title( "Fired Events" ) ]
+	[ SerializeField ] GameEvent event_level_complete;
 	[ SerializeField ] GameEvent event_level_failed;
 
   [ Title( "Components" ) ]
@@ -49,9 +50,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-		onUpdateMethod      = ExtensionMethods.EmptyMethod;
-		onFixedUpdateMethod = ExtensionMethods.EmptyMethod;
-		onInputFingerDown   = ExtensionMethods.EmptyMethod;
+		EmptyDelegates();
 
 		_collider.enabled = false;
 	}
@@ -92,7 +91,9 @@ public class Player : MonoBehaviour
 
 	public void OnTrigger_Ground()
 	{
-		if( notif_input_finger_isPressing.sharedValue && !jump_collided_break )
+		if( transform.position.y <= GameSettings.Instance.player_level_complete_buffer )
+			LevelComplete();
+		else if( notif_input_finger_isPressing.sharedValue && !jump_collided_break )
 		{
 			DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
 
@@ -225,17 +226,32 @@ public class Player : MonoBehaviour
 		onInputFingerDown = Jump;
 	}
 
+	void LevelComplete()
+	{
+		EmptyDelegates();
+		_collider.enabled = false;
+
+		// spawn victory pfx
+		// Play victory animation
+
+		event_level_complete.Raise();
+	}
+
 	void LevelFailed()
+	{
+		EmptyDelegates();
+		_collider.enabled = false;
+		// disable gfx object
+		// spawn death pfx
+
+		event_level_failed.Raise();
+	}
+
+	void EmptyDelegates()
 	{
 		onUpdateMethod      = ExtensionMethods.EmptyMethod;
 		onFixedUpdateMethod = ExtensionMethods.EmptyMethod;
 		onInputFingerDown   = ExtensionMethods.EmptyMethod;
-
-		// disable gfx object
-		// raise player death pfx
-
-
-		event_level_failed.Raise();
 	}
 #endregion
 

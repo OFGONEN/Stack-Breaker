@@ -18,6 +18,7 @@ namespace FFStudio
         [ LabelText( "Player Punch Power" ) ] public float player_punch_power = 1;
         [ LabelText( "Player Punch Duration" ) ] public float player_punch_duraion = 0.35f;
         [ LabelText( "Player Punch Ease" ) ] public Ease player_punch_ease = Ease.Linear;
+        [ LabelText( "Player Level Complete Buffer" ) ] public float player_level_complete_buffer = 0.01f;
 
     [ Title( "Player Movement" ) ]
         [ LabelText( "Player Rotation Speed" ) ] public float player_rotation_speed = 1f;

@@ -19,6 +19,7 @@ MonoBehaviour:
   player_punch_power: 1
   player_punch_duraion: 0.35
   player_punch_ease: 1
+  player_level_complete_buffer: 0.01
   player_rotation_speed: -100
   player_movement_rotate_cofactor_jumping: 0.5
   player_jump_height: 0.35

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/app.unity
     guid: ad0d37aebbbd4c54396618f1c151ebb7
   - enabled: 1
+    path: Assets/Test/test_physics_scene_template.unity
+    guid: f6d6d1cc999fec74c83da6a285824402
+  - enabled: 1
     path: Assets/Scenes/game_template.unity
     guid: c7e03bd5129fc4c36ac54c6e26a7669b
   m_configObjects: {}
