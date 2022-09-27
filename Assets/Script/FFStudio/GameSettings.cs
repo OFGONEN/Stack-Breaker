@@ -14,6 +14,10 @@ namespace FFStudio
         [ LabelText( "Player Step Height" ) ] public float player_step_height = 0.5f;
         [ LabelText( "Player Input Activation Delay" ) ] public float player_input_activation_delay = 0.5f;
         [ LabelText( "Player Width Range" ) ] public Vector2 player_width_range;
+        [ LabelText( "Player Punch Vector" ) ] public Vector3 player_punch_vector = new Vector3( 1, 1 ,1 );
+        [ LabelText( "Player Punch Power" ) ] public float player_punch_power = 1;
+        [ LabelText( "Player Punch Duration" ) ] public float player_punch_duraion = 0.35f;
+        [ LabelText( "Player Punch Ease" ) ] public Ease player_punch_ease = Ease.Linear;
 
     [ Title( "Player Movement" ) ]
         [ LabelText( "Player Rotation Speed" ) ] public float player_rotation_speed = 1f;
@@ -61,6 +65,10 @@ namespace FFStudio
 
         [ FoldoutGroup( "Debug" ) ] public float debug_ui_text_float_height;
         [ FoldoutGroup( "Debug" ) ] public float debug_ui_text_float_duration;
+#endregion
+
+#region Property
+        public Vector3 PlayerPunchVector => player_punch_vector * player_punch_power;
 #endregion
 
 #region Fields (Singleton Related)

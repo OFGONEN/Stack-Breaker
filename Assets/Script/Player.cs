@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 	[ SerializeField ] GameEvent event_level_failed;
 
   [ Title( "Components" ) ]
+    [ SerializeField ] Transform transform_punch;
     [ SerializeField ] Transform transform_width;
     [ SerializeField ] Rigidbody _rigidBody;
     [ SerializeField ] Collider _collider;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
     UnityMessage onInputFingerDown;
 
 	RecycledTween recycledTween = new RecycledTween();
+	RecycledTween recycledTween_PlayerPunchScale = new RecycledTween();
 #endregion
 
 #region Properties
@@ -95,12 +97,13 @@ public class Player : MonoBehaviour
 		else
 			StartMovement();
 
-		// FFLogger.PopUpText( transform.position + Vector3.up, "Ground Trigger" );
+		PunchScalePlayer();
+
+		FFLogger.PopUpText( transform.position + Vector3.up, "Ground Trigger" );
 	}
 
 	public void OnTrigger_Break( Collider collider )
 	{
-		// FFLogger.PopUpText( transform.position + Vector3.up, "Break Trigger" );
 		if( notif_input_finger_isPressing.sharedValue )
 		{
 			DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
@@ -115,6 +118,10 @@ public class Player : MonoBehaviour
 		}
 		else
 			StartMovement();
+
+		PunchScalePlayer();
+
+		FFLogger.PopUpText( transform.position + Vector3.up, "Break Trigger" );
 	}
 #endregion
 
@@ -143,6 +150,16 @@ public class Player : MonoBehaviour
 	{
 		var scale = GameSettings.Instance.player_width_range.ReturnProgress( notif_player_width.sharedValue );
 		transform_width.localScale = new Vector3( scale, 1, scale );
+	}
+
+	void PunchScalePlayer()
+	{
+		if( !recycledTween_PlayerPunchScale.IsPlaying() )
+			recycledTween_PlayerPunchScale.Recycle( transform_punch.DOPunchScale( 
+				GameSettings.Instance.PlayerPunchVector,
+				GameSettings.Instance.player_punch_duraion )
+				.SetEase( GameSettings.Instance.player_punch_ease )
+			 );
 	}
 
 	[ Button() ]
