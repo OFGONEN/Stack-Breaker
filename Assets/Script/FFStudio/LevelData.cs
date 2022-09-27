@@ -14,6 +14,9 @@ namespace FFStudio
 	[ Title( "Setup" ) ]
 		[ ValueDropdown( "SceneList" ), LabelText( "Scene Index" ) ] public int scene_index;
         [ LabelText( "Override As Active Scene" ) ] public bool scene_overrideAsActiveScene;
+        [ LabelText( "Player Start Width Ratio" ) ] public float player_width_ratio;
+        [ LabelText( "Collectable Cofactor" ) ] public float collectable_cofactor;
+        [ LabelText( "Break Cofactor" ) ] public float break_cofactor;
 
 #if UNITY_EDITOR
 		static IEnumerable SceneList()
