@@ -115,14 +115,20 @@ public class Player : MonoBehaviour
 #endregion
 
 #region Implementation
-	void IncreasePlayerWidth( int value )
+	void IncreasePlayerWidth( float value )
 	{
-		notif_player_width.SharedValue += value;
+		notif_player_width.SharedValue = Mathf.Clamp( notif_player_width.sharedValue + value,
+			0f,
+			1f
+		);
 	}
 
-	void DecreasePlayerWidth( int value )
+	void DecreasePlayerWidth( float value )
 	{
-		notif_player_width.SharedValue -= value;
+		notif_player_width.SharedValue = Mathf.Clamp( notif_player_width.sharedValue - value,
+			0f,
+			1f
+		);	
 	}
 
 	[ Button() ]
