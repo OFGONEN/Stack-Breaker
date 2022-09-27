@@ -98,14 +98,19 @@ public class Player : MonoBehaviour
 			DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
 
 			if( notif_player_width.sharedValue > 0 )
+			{
+				PunchScalePlayer();
 				StartMovement();
+			}
 			else
-				event_level_failed.Raise();
+				LevelFailed();
 		}
 		else
+		{
+			PunchScalePlayer();
 			StartMovement();
+		}
 
-		PunchScalePlayer();
 
 		FFLogger.PopUpText( transform.position + Vector3.up, "Ground Trigger" );
 	}
@@ -122,13 +127,16 @@ public class Player : MonoBehaviour
 			else
 			{
 				current_position -= GameSettings.Instance.player_step_height;
+				PunchScalePlayer();
 				//todo collider.GetComponent< Break >.Break();
 			}
 		}
 		else
+		{
+			PunchScalePlayer();
 			StartMovement();
+		}
 
-		PunchScalePlayer();
 
 		FFLogger.PopUpText( transform.position + Vector3.up, "Break Trigger" );
 	}
