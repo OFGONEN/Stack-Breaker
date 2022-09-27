@@ -13,10 +13,12 @@ public class Player : MonoBehaviour
   [ Title( "Shared" ) ]
 	[ SerializeField ] SharedBoolNotifier notif_input_finger_isPressing;
 	[ SerializeField ] SharedFloatNotifier notif_player_width;
+
   [ Title( "Fired Events" ) ]
 	[ SerializeField ] GameEvent event_level_failed;
 
   [ Title( "Components" ) ]
+    [ SerializeField ] Transform transform_width;
     [ SerializeField ] Rigidbody _rigidBody;
     [ SerializeField ] Collider _collider;
 
@@ -24,8 +26,9 @@ public class Player : MonoBehaviour
 	float jump_speed_cofactor = 1f;
 	float current_position    = 0;
 	bool  jump_collided_break = false;
+	Vector3 width_vector = new Vector3( 1, 0, 1 );
 
-    UnityMessage onUpdateMethod;
+	UnityMessage onUpdateMethod;
     UnityMessage onFixedUpdateMethod;
     UnityMessage onInputFingerDown;
 
@@ -122,6 +125,8 @@ public class Player : MonoBehaviour
 			0f,
 			1f
 		);
+
+		UpdatePlayerWidth();
 	}
 
 	void DecreasePlayerWidth( float value )
@@ -129,7 +134,15 @@ public class Player : MonoBehaviour
 		notif_player_width.SharedValue = Mathf.Clamp( notif_player_width.sharedValue - value,
 			0f,
 			1f
-		);	
+		);
+
+		UpdatePlayerWidth();
+	}
+
+	void UpdatePlayerWidth()
+	{
+		var scale = GameSettings.Instance.player_width_range.ReturnProgress( notif_player_width.sharedValue );
+		transform_width.localScale = new Vector3( scale, 1, scale );
 	}
 
 	[ Button() ]
