@@ -19,9 +19,7 @@ namespace FFStudio
 			var offset = GameSettings.Instance.ui_safeArea_offset_top - dangerArea;
 
 			var position = uiRectTransform.position;
-			FFLogger.Log( "Position: " + position );
 			position.y += offset;
-			FFLogger.Log( "Position With Offset: " + position );
 
 			uiRectTransform.position = position;
 		}
