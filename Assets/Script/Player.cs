@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
   [ Title( "Shared" ) ]
 	[ SerializeField ] SharedBoolNotifier notif_input_finger_isPressing;
 	[ SerializeField ] SharedFloatNotifier notif_player_width;
+	[ SerializeField ] SharedFloatNotifier notif_level_progress;
 
   [ Title( "Fired Events" ) ]
 	[ SerializeField ] GameEvent event_level_complete;
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
 
 // Private
 	float jump_speed_cofactor = 1f;
+	float start_position      = 0;
 	float current_position    = 0;
 	bool  jump_collided_break = false;
 	Vector3 width_vector = new Vector3( 1, 0, 1 );
@@ -64,6 +66,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
 		onUpdateMethod();
+		UpdateLevelProgress();
 	}
 
     private void FixedUpdate()
@@ -75,6 +78,7 @@ public class Player : MonoBehaviour
 #region API
     public void OnLevelStartMethod()
     {
+		start_position   = transform.position.y;
 		current_position = transform.position.y;
 		StartMovement();
 	}
@@ -246,7 +250,10 @@ public class Player : MonoBehaviour
 	{
 		EmptyDelegates();
 		_collider.enabled = false;
+
 		// disable gfx object
+		transform_width.gameObject.SetActive( false );
+		FFLogger.PopUpText( transform.position + Vector3.up / 2f, "Level Failed" );
 		// spawn death pfx
 
 		event_level_failed.Raise();
@@ -257,6 +264,11 @@ public class Player : MonoBehaviour
 		onUpdateMethod      = ExtensionMethods.EmptyMethod;
 		onFixedUpdateMethod = ExtensionMethods.EmptyMethod;
 		onInputFingerDown   = ExtensionMethods.EmptyMethod;
+	}
+
+	void UpdateLevelProgress()
+	{
+		notif_level_progress.SharedValue = ( start_position - transform.position.y ) / start_position;
 	}
 #endregion
 
