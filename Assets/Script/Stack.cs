@@ -13,6 +13,8 @@ public class Stack : MonoBehaviour
 	static int SHADER_ID_COLOR = Shader.PropertyToID( "_BaseColor" );
 
 	MaterialPropertyBlock propertyBlock;
+
+	UnityMessage onBreakMethod;
 #endregion
 
 #region Properties
@@ -27,16 +29,31 @@ public class Stack : MonoBehaviour
     private void Start()
     {
         if( Mathf.Approximately( 0, transform.position.y ) )
+		{
+			onBreakMethod = ExtensionMethods.EmptyMethod;
 			SetGroundStackColor();
+		}
 		else
+		{
+			onBreakMethod = Break;
 			SetStackColor();
+		}
 	}
 #endregion
 
 #region API
+	public void OnBreak()
+	{
+		onBreakMethod();
+	}
 #endregion
 
 #region Implementation
+	void Break()
+	{
+
+	}
+
     void SetGroundStackColor()
     {
 		for( var i = 0; i < transform.childCount; i++ )

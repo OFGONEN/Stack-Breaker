@@ -130,8 +130,10 @@ public class Player : MonoBehaviour
 			if( supposedWidth < 0 )
 				LevelFailed();
 			else
+			{
 				PunchScalePlayer_OnGround();
-				//todo collider.GetComponent< Break >.Break();
+				collider.GetComponentInParent< Stack >().OnBreak(); // Stack
+			}
 		}
 		else
 			StartMovement();
