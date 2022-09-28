@@ -45,6 +45,12 @@ namespace FFStudio
         {
 
         }
+
+        public void OnCylinderReference( object cylinderColorSetter )
+        {
+            if( cylinderColorSetter != null )
+		        ( cylinderColorSetter as ColorSetter ).SetColor( CurrentLevelData.Instance.levelData.cylinder_color );
+		}
 #endregion
 
 #region Implementation
