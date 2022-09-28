@@ -77,7 +77,7 @@ namespace FFStudio
 #region Editor Only
 #if UNITY_EDITOR
 		[ Button() ]
-		void ResetPosition()
+		public void ResetPosition()
 		{
 			var player = GameObject.FindGameObjectWithTag( "Player" ).transform;
 
