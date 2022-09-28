@@ -64,7 +64,7 @@ public class Stack : MonoBehaviour
 
 		renderer.GetPropertyBlock( propertyBlock );
 
-		propertyBlock.SetColor( SHADER_ID_COLOR, CurrentLevelData.Instance.levelData.break_color );
+		propertyBlock.SetColor( SHADER_ID_COLOR, color );
 		renderer.SetPropertyBlock( propertyBlock );
 	}
 
