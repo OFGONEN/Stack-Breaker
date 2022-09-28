@@ -8,7 +8,9 @@ namespace FFStudio
 	public class ColorSetter : MonoBehaviour
 	{
 #region Fields
-		[ TitleGroup( "Setup" ), SerializeField ] Color color;
+	  [ Title( "Setup" ) ]
+		[ SerializeField ] Color color;
+		[ SerializeField ] bool setOnAwake;
 
 		static int SHADER_ID_COLOR = Shader.PropertyToID( "_BaseColor" );
 
@@ -23,8 +25,13 @@ namespace FFStudio
 		void Awake()
 		{
 			theRenderer = GetComponent< Renderer >();
-
 			propertyBlock = new MaterialPropertyBlock();
+		}
+
+		private void Start()
+		{
+			if( setOnAwake )
+				SetColor();
 		}
 #endregion
 
@@ -58,6 +65,11 @@ namespace FFStudio
 
 #region Editor Only
 #if UNITY_EDITOR
+		public void SetSeriliazedColor( Color color, bool onAwake )
+		{
+			this.color = color;
+			setOnAwake = onAwake;
+		}
 #endif
 #endregion
 	}
