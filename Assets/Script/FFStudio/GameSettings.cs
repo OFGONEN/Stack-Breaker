@@ -34,8 +34,9 @@ namespace FFStudio
         [ LabelText( "Player Fall Speed" ) ] public float player_fall_speed = 1f;
 
     [ Title( "Camera" ) ]
-        [ LabelText( "Follow Offset" ) ] public Vector3 camera_follow_offset;
-        [ LabelText( "Follow Speed" ) ] public float camera_follow_speed = 2.8f;
+        [ LabelText( "Camera Follow Offset" ) ] public Vector3 camera_follow_offset;
+        [ LabelText( "Camera Look Axis" ) ] public Vector3 camera_look_axis;
+        [ LabelText( "Camera Follow Speed" ) ] public float camera_follow_speed = 2.8f;
     
     [ Title( "Project Setup", "These settings should not be edited by Level Designer(s).", TitleAlignments.Centered ) ]
         public int maxLevelCount;

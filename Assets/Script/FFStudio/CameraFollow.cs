@@ -9,11 +9,13 @@ namespace FFStudio
 	{
 #region Fields
 		[ Title( "Setup" ) ]
-		[ SerializeField ] SharedReferenceNotifier notif_target_reference;
+		[ SerializeField ] SharedReferenceNotifier notif_target_follow_reference;
+		[ SerializeField ] SharedReferenceNotifier notif_target_look_reference;
 
 		UnityMessage onUpdateMethod;
 
-		Transform target_transform;
+		Transform target_transform_follow;
+		Transform target_transform_look;
 		Vector3 target_offset;
 #endregion
 
@@ -35,8 +37,9 @@ namespace FFStudio
 #region API
 		public void OnLevelStarted()
 		{
-			target_offset    = GameSettings.Instance.camera_follow_offset;
-			target_transform = notif_target_reference.sharedValue as Transform;
+			target_offset           = GameSettings.Instance.camera_follow_offset;
+			target_transform_follow = notif_target_follow_reference.sharedValue as Transform;
+			target_transform_look   = notif_target_look_reference.sharedValue as Transform;
 
 			onUpdateMethod = FollowTarget;
 		}
@@ -51,12 +54,12 @@ namespace FFStudio
 		void FollowTarget()
 		{
 			SetPosition();
-			transform.LookAtAxis( Vector3.zero, Vector3.up );
+			transform.LookAtAxis( target_transform_look.position, GameSettings.Instance.camera_look_axis );
 		}
 
 		void SetPosition()
 		{
-			var targetPosition = target_transform.TransformPoint( target_offset );
+			var targetPosition = target_transform_follow.TransformPoint( target_offset );
 			transform.position = Vector3.Lerp( transform.position, targetPosition, Time.deltaTime * GameSettings.Instance.camera_follow_speed );
 		}
 #endregion
@@ -69,7 +72,7 @@ namespace FFStudio
 			var player = GameObject.FindGameObjectWithTag( "Player" ).transform;
 
 			transform.position = player.TransformPoint( GameSettings.Instance.camera_follow_offset );
-			transform.LookAtAxis( Vector3.zero, Vector3.up );
+			transform.LookAtAxis( player.GetChild( 3 ).position, GameSettings.Instance.camera_look_axis );
 		}
 #endif
 #endregion

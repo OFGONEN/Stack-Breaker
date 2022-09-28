@@ -147,7 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb1e6ed2b00bf54481887a02ec8fad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notif_target_reference: {fileID: 11400000, guid: 5ad2547fd5a97644abb5375a3c8f3ca7, type: 2}
+  notif_target_follow_reference: {fileID: 11400000, guid: 5ad2547fd5a97644abb5375a3c8f3ca7, type: 2}
+  notif_target_look_reference: {fileID: 11400000, guid: 5ec9a955e54fbb74e916d55a7c3f8220, type: 2}
 --- !u!114 &1923413740326004031
 MonoBehaviour:
   m_ObjectHideFlags: 0
