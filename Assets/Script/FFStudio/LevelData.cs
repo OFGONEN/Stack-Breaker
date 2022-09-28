@@ -17,9 +17,11 @@ namespace FFStudio
         [ LabelText( "Player Start Width Ratio" ) ] public float player_width_ratio;
         [ LabelText( "Collectable Cofactor" ) ] public float collectable_cofactor;
         [ LabelText( "Break Cofactor" ) ] public float break_cofactor;
+        [ LabelText( "Break Material" ) ] public Material break_material;
+        [ LabelText( "Break Color" ) ] public Color break_color;
+        [ LabelText( "Ground Material" ) ] public Material ground_material;
         [ LabelText( "Ground Color" ) ] public Color ground_color;
         [ LabelText( "Ground Final Color" ) ] public Color ground_final_color;
-        [ LabelText( "Break Color" ) ] public Color break_color;
         [ LabelText( "Cylinder Color" ) ] public Color cylinder_color;
 
 #if UNITY_EDITOR
