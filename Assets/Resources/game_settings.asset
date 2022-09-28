@@ -32,7 +32,8 @@ MonoBehaviour:
   player_fall_speed: 1
   camera_follow_offset: {x: 5, y: 4, z: 0}
   camera_look_axis: {x: 1, y: 1, z: 0}
-  camera_follow_speed: 20
+  camera_follow_speed_lateral: 20
+  camera_follow_speed_vertical: 1
   maxLevelCount: 1
   useRemoteConfig_GameSettings: 0
   useRemoteConfig_Components: 0

@@ -59,8 +59,18 @@ namespace FFStudio
 
 		void SetPosition()
 		{
+			var position = transform.position;
 			var targetPosition = target_transform_follow.TransformPoint( target_offset );
-			transform.position = Vector3.Lerp( transform.position, targetPosition, Time.deltaTime * GameSettings.Instance.camera_follow_speed );
+
+			var lateralDelta  = GameSettings.Instance.camera_follow_speed_lateral * Time.deltaTime;
+			var verticalDelta = GameSettings.Instance.camera_follow_speed_vertical * Time.deltaTime;
+
+			targetPosition.x = Mathf.Lerp( position.x, targetPosition.x, lateralDelta );
+			targetPosition.y = Mathf.Lerp( position.y, targetPosition.y, lateralDelta );
+			targetPosition.z = Mathf.Lerp( position.z, targetPosition.z, lateralDelta );
+
+			transform.position = targetPosition;
+			// transform.position = Vector3.Lerp( transform.position, targetPosition, Time.deltaTime * GameSettings.Instance.camera_follow_speed_lateral );
 		}
 #endregion
 
