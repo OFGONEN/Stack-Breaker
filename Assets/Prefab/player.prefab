@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8b9286af946534c832e5352b9db9e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedReferenceProperty: {fileID: 11400000, guid: 488e798dd6f140e4a84fa7485b885dd3, type: 2}
+  sharedReferenceProperty: {fileID: 11400000, guid: 5ad2547fd5a97644abb5375a3c8f3ca7, type: 2}
   referenceComponent: {fileID: 7864169660158023500}
 --- !u!1 &7864169660841706901
 GameObject:
