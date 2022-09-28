@@ -17,3 +17,5 @@ MonoBehaviour:
   player_width_ratio: 0
   collectable_cofactor: 0.1
   break_cofactor: 0.25
+  ground_color: {r: 1, g: 1, b: 1, a: 1}
+  break_color: {r: 1, g: 0.7933164, b: 0, a: 1}

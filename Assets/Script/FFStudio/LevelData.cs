@@ -17,6 +17,8 @@ namespace FFStudio
         [ LabelText( "Player Start Width Ratio" ) ] public float player_width_ratio;
         [ LabelText( "Collectable Cofactor" ) ] public float collectable_cofactor;
         [ LabelText( "Break Cofactor" ) ] public float break_cofactor;
+        [ LabelText( "Ground Color" ) ] public Color ground_color;
+        [ LabelText( "Break Color" ) ] public Color break_color;
 
 #if UNITY_EDITOR
 		static IEnumerable SceneList()
