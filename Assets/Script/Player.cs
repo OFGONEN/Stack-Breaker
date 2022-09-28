@@ -95,15 +95,14 @@ public class Player : MonoBehaviour
 			LevelComplete();
 		else if( notif_input_finger_isPressing.sharedValue && !jump_collided_break )
 		{
-			DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
-
-			if( notif_player_width.sharedValue > 0 )
+			var supposedWidth = DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
+			if( supposedWidth < 0 )
+				LevelFailed();
+			else
 			{
 				PunchScalePlayer();
 				StartMovement();
 			}
-			else
-				LevelFailed();
 		}
 		else
 			StartMovement();
@@ -116,10 +115,10 @@ public class Player : MonoBehaviour
 	{
 		if( notif_input_finger_isPressing.sharedValue )
 		{
-			DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
 			collider.gameObject.SetActive( false );
+			var supposedWidth = DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
 
-			if( notif_player_width.sharedValue < 0 )
+			if( supposedWidth < 0 )
 				LevelFailed();
 			else
 			{
@@ -147,14 +146,18 @@ public class Player : MonoBehaviour
 		UpdatePlayerWidth();
 	}
 
-	void DecreasePlayerWidth( float value )
+	float DecreasePlayerWidth( float value )
 	{
-		notif_player_width.SharedValue = Mathf.Clamp( notif_player_width.sharedValue - value,
+		var width = notif_player_width.sharedValue - value;
+
+		notif_player_width.SharedValue = Mathf.Clamp( width,
 			0f,
 			1f
 		);
 
 		UpdatePlayerWidth();
+
+		return width;
 	}
 
 	void UpdatePlayerWidth()
