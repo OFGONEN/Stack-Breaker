@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FFStudio;
 using UnityEditor;
 using Sirenix.OdinInspector;
 
@@ -33,7 +34,6 @@ public class CreatorTool : ScriptableObject
 			var piece = PrefabUtility.InstantiatePrefab( place_stack_data.stack_gameObject ) as GameObject;
 
 			piece.transform.SetParent( place_stack_parent );
-
 			piece.transform.localPosition    = Vector3.zero;
 			piece.transform.localEulerAngles = Vector3.up * place_stack_data.stack_angle * i;
 		}
