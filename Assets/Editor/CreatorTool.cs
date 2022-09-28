@@ -56,7 +56,7 @@ public class CreatorTool : ScriptableObject
 
 		cylinder.localScale = Vector3.one.SetY( verticalPosition * level_cylinder_scale_cofactor );
 		player.position     = ( Vector3.up * lastStackPosition ).SetZ( level_player_offset );
-		player.forward = Vector3.right;
+		player.forward      = Vector3.right;
 
 		Camera.main.GetComponent< CameraFollow >().ResetPosition();
 	}
