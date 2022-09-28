@@ -478,7 +478,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &533454813
 Transform:
@@ -1138,6 +1138,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533454813}
     m_Modifications:
+    - target: {fileID: 2010408154525210094, guid: 5d963e0819d26423cbc7a016ad7773ca, type: 3}
+      propertyPath: m_Layer
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5111310088357054527, guid: 5d963e0819d26423cbc7a016ad7773ca, type: 3}
+      propertyPath: m_Layer
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150590728865848429, guid: 5d963e0819d26423cbc7a016ad7773ca, type: 3}
+      propertyPath: m_Layer
+      value: 29
+      objectReference: {fileID: 0}
     - target: {fileID: 7580998443388355032, guid: 5d963e0819d26423cbc7a016ad7773ca, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1181,6 +1193,10 @@ PrefabInstance:
     - target: {fileID: 7580998443388355032, guid: 5d963e0819d26423cbc7a016ad7773ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716360053346317456, guid: 5d963e0819d26423cbc7a016ad7773ca, type: 3}
+      propertyPath: m_Layer
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 8863452889774262893, guid: 5d963e0819d26423cbc7a016ad7773ca, type: 3}
       propertyPath: m_Name
