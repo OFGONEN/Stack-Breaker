@@ -29,6 +29,8 @@ MonoBehaviour:
   player_jump_duration: 0.25
   player_jump_ease: 1
   player_fall_speed: 1
+  stack_break_material: {fileID: 2100000, guid: edb23a0f1cdc64a09b20a50ae8a456d7, type: 2}
+  stack_ground_final_material: {fileID: 2100000, guid: 81e5bb1c1e32448ce943ef86ecc9346e, type: 2}
   camera_follow_offset: {x: 5, y: 4, z: 0}
   camera_look_axis: {x: 1, y: 1, z: 0}
   camera_follow_speed_lateral: 20

@@ -32,6 +32,10 @@ namespace FFStudio
         [ LabelText( "Player Jump Ease" ) ] public Ease player_jump_ease = Ease.Linear;
         [ LabelText( "Player Fall Speed" ) ] public float player_fall_speed = 1f;
 
+    [ Title( "Stack" ) ]
+        [ LabelText( "Stack Break Material" ) ] public Material stack_break_material;
+        [ LabelText( "Stack Ground Final Material" ) ] public Material stack_ground_final_material;
+
     [ Title( "Camera" ) ]
         [ LabelText( "Camera Follow Offset" ) ] public Vector3 camera_follow_offset;
         [ LabelText( "Camera Look Axis" ) ] public Vector3 camera_look_axis;
