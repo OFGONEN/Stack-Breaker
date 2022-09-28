@@ -91,6 +91,7 @@ public class Player : MonoBehaviour
 	public void OnPlayerGainedWeight( IntGameEvent gameEvent )
 	{
 		IncreasePlayerWidth( gameEvent.eventValue * CurrentLevelData.Instance.levelData.collectable_cofactor );
+		PunchScalePlayer_OnCollectable();
 	}
 
 	public void OnTrigger_Ground()
@@ -104,7 +105,7 @@ public class Player : MonoBehaviour
 				LevelFailed();
 			else
 			{
-				PunchScalePlayer();
+				PunchScalePlayer_OnGround();
 				StartMovement();
 			}
 		}
@@ -127,7 +128,7 @@ public class Player : MonoBehaviour
 			else
 			{
 				current_position -= GameSettings.Instance.player_step_height;
-				PunchScalePlayer();
+				PunchScalePlayer_OnGround();
 				//todo collider.GetComponent< Break >.Break();
 			}
 		}
@@ -170,14 +171,24 @@ public class Player : MonoBehaviour
 		transform_width.localScale = new Vector3( scale, 1, scale );
 	}
 
-	void PunchScalePlayer()
+	void PunchScalePlayer_OnGround()
 	{
-		if( !recycledTween_PlayerPunchScale.IsPlaying() )
-			recycledTween_PlayerPunchScale.Recycle( transform_punch.DOPunchScale( 
-				GameSettings.Instance.PlayerPunchVector,
-				GameSettings.Instance.player_punch_duraion )
-				.SetEase( GameSettings.Instance.player_punch_ease )
-			 );
+		transform_punch.localScale = Vector3.one;
+		recycledTween_PlayerPunchScale.Recycle( transform_punch.DOPunchScale(
+			GameSettings.Instance.PlayerPunchVector_Ground,
+			GameSettings.Instance.player_punch_ground_duraion )
+			.SetEase( GameSettings.Instance.player_punch_ground_ease )
+		);
+	}
+
+	void PunchScalePlayer_OnCollectable()
+	{
+		transform_punch.localScale = Vector3.one;
+		recycledTween_PlayerPunchScale.Recycle( transform_punch.DOPunchScale(
+			GameSettings.Instance.PlayerPunchVector_Collectable,
+			GameSettings.Instance.player_punch_collectable_duraion )
+			.SetEase( GameSettings.Instance.player_punch_collectable_ease )
+		);
 	}
 
 	[ Button() ]
