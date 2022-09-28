@@ -24,13 +24,14 @@ MonoBehaviour:
   player_punch_collectable_duraion: 0.35
   player_punch_collectable_ease: 1
   player_level_complete_buffer: 0.01
-  player_rotation_speed: -100
+  player_rotation_speed: -20
   player_movement_rotate_cofactor_jumping: 0.5
   player_jump_height: 0.35
   player_jump_duration: 0.25
   player_jump_ease: 1
   player_fall_speed: 1
-  camera_follow_speed_depth: 2.8
+  camera_follow_offset: {x: 5, y: 4, z: 0}
+  camera_follow_speed: 20
   maxLevelCount: 1
   useRemoteConfig_GameSettings: 0
   useRemoteConfig_Components: 0

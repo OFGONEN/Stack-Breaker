@@ -5,85 +5,73 @@ using Sirenix.OdinInspector;
 
 namespace FFStudio
 {
-    public class CameraFollow : MonoBehaviour
-    {
+	public class CameraFollow : MonoBehaviour
+	{
 #region Fields
-    [ Title( "Event Listeners" ) ]
-        [ SerializeField ] EventListenerDelegateResponse levelRevealEventListener;
-        [ SerializeField ] MultipleEventListenerDelegateResponse levelEndEventListener;
-        
-    [ Title( "Setup" ) ]
-        [ SerializeField ] SharedReferenceNotifier notifier_reference_transform_target;
+		[ Title( "Setup" ) ]
+		[ SerializeField ] SharedReferenceNotifier notif_target_reference;
 
-        Transform transform_target;
-        Vector3 followOffset;
+		UnityMessage onUpdateMethod;
 
-        UnityMessage updateMethod;
+		Transform target_transform;
+		Vector3 target_offset;
 #endregion
 
 #region Properties
 #endregion
 
 #region Unity API
-        void OnEnable()
-        {
-            levelRevealEventListener.OnEnable();
-            levelEndEventListener.OnEnable();
-        }
+		private void Awake()
+		{
+			onUpdateMethod = ExtensionMethods.EmptyMethod;
+		}
 
-        void OnDisable()
-        {
-            levelRevealEventListener.OnDisable();
-            levelEndEventListener.OnDisable();
-        }
-
-        void Awake()
-        {
-            levelRevealEventListener.response = LevelRevealedResponse;
-            levelEndEventListener.response    = LevelCompleteResponse;
-
-            updateMethod = ExtensionMethods.EmptyMethod;
-        }
-
-        void Update()
-        {
-            updateMethod();
-        }
+		private void Update()
+		{
+			onUpdateMethod();
+		}
 #endregion
 
 #region API
+		public void OnLevelStarted()
+		{
+			target_offset    = GameSettings.Instance.camera_follow_offset;
+			target_transform = notif_target_reference.sharedValue as Transform;
+
+			onUpdateMethod = FollowTarget;
+		}
+
+		public void OnLevelFinished()
+		{
+			onUpdateMethod = ExtensionMethods.EmptyMethod;
+		}
 #endregion
 
 #region Implementation
-        void LevelRevealedResponse()
-        {
-            transform_target = notifier_reference_transform_target.SharedValue as Transform;
+		void FollowTarget()
+		{
+			SetPosition();
+			transform.LookAtAxis( Vector3.zero, Vector3.up );
+		}
 
-            followOffset = transform_target.position - transform.position;
-
-            updateMethod = FollowTarget;
-        }
-
-        void LevelCompleteResponse()
-        {
-            updateMethod = ExtensionMethods.EmptyMethod;
-        }
-
-        void FollowTarget()
-        {
-            // Info: Simple follow logic.
-            var player_position = transform_target.position;
-            var target_position = transform_target.position - followOffset;
-
-            target_position.x = 0;
-            target_position.z = Mathf.Lerp( transform.position.z, target_position.z, Time.deltaTime * GameSettings.Instance.camera_follow_speed_depth );
-            transform.position = target_position;
-        }
+		void SetPosition()
+		{
+			var targetPosition = target_transform.TransformPoint( target_offset );
+			transform.position = Vector3.Lerp( transform.position, targetPosition, Time.deltaTime * GameSettings.Instance.camera_follow_speed );
+		}
 #endregion
 
 #region Editor Only
 #if UNITY_EDITOR
+		[ Button() ]
+		void ResetPosition()
+		{
+			var player = GameObject.FindGameObjectWithTag( "Player" ).transform;
+
+			transform.position = player.TransformPoint( GameSettings.Instance.camera_follow_offset );
+			transform.LookAtAxis( Vector3.zero, Vector3.up );
+		}
 #endif
 #endregion
-    }
+	}
 }
