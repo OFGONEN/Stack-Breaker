@@ -39,7 +39,7 @@ public class CreatorTool : ScriptableObject
 		EditorSceneManager.MarkAllScenesDirty();
 
 		var stackParent = GameObject.Find( "stack_parent" ).transform;
-		var cylinder    = GameObject.Find( "gfx_cylinder" ).transform;
+		var cylinder    = GameObject.Find( "cylinder" ).transform;
 		var player      = GameObject.FindWithTag( "Player" ).transform;
 
 		stackParent.DestroyAllChildren();
