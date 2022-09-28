@@ -78,6 +78,13 @@ public class CreatorTool : ScriptableObject
 			piece.transform.localEulerAngles = Vector3.up * place_stack_data.stack_angle * i;
 		}
     }
+
+	[ Button() ]
+	void RotateSelection( float angle )
+	{
+		var selection = Selection.activeGameObject.transform;
+		selection.RotateAround( Vector3.up.SetY( selection.position.y ), Vector3.up, angle );
+	}
 #endregion
 
 #region Editor Only
