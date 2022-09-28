@@ -106,10 +106,7 @@ public class Player : MonoBehaviour
 				LevelFailed();
 		}
 		else
-		{
-			PunchScalePlayer();
 			StartMovement();
-		}
 
 
 		FFLogger.PopUpText( transform.position + Vector3.up, "Ground Trigger" );
@@ -122,7 +119,7 @@ public class Player : MonoBehaviour
 			DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
 			collider.gameObject.SetActive( false );
 
-			if( notif_player_width.sharedValue <= 0 )
+			if( notif_player_width.sharedValue < 0 )
 				LevelFailed();
 			else
 			{
@@ -132,10 +129,7 @@ public class Player : MonoBehaviour
 			}
 		}
 		else
-		{
-			PunchScalePlayer();
 			StartMovement();
-		}
 
 
 		FFLogger.PopUpText( transform.position + Vector3.up, "Break Trigger" );
