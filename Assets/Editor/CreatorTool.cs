@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using Sirenix.OdinInspector;
 
 [ CreateAssetMenu( fileName = "tool_creator", menuName = "FFEditor/Creator Tool" ) ]
@@ -35,6 +36,8 @@ public class CreatorTool : ScriptableObject
     [ Button() ]
     void CreateLevel()
     {
+		EditorSceneManager.MarkAllScenesDirty();
+
 		var stackParent = GameObject.Find( "stack_parent" ).transform;
 		var cylinder    = GameObject.Find( "gfx_cylinder" ).transform;
 		var player      = GameObject.FindWithTag( "Player" ).transform;
@@ -59,6 +62,8 @@ public class CreatorTool : ScriptableObject
 		player.forward      = Vector3.right;
 
 		Camera.main.GetComponent< CameraFollow >().ResetPosition();
+
+		AssetDatabase.SaveAssets();
 	}
 
     [ Button() ]
