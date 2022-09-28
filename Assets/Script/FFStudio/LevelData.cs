@@ -18,7 +18,9 @@ namespace FFStudio
         [ LabelText( "Collectable Cofactor" ) ] public float collectable_cofactor;
         [ LabelText( "Break Cofactor" ) ] public float break_cofactor;
         [ LabelText( "Ground Color" ) ] public Color ground_color;
+        [ LabelText( "Ground Final Color" ) ] public Color ground_final_color;
         [ LabelText( "Break Color" ) ] public Color break_color;
+        [ LabelText( "Cylinder Color" ) ] public Color cylinder_color;
 
 #if UNITY_EDITOR
 		static IEnumerable SceneList()
