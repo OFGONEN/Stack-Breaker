@@ -11,10 +11,10 @@ namespace FFStudio
 	  [ Title( "Setup" ) ]
 		[ SerializeField ] Color color;
 		[ SerializeField ] bool setOnAwake;
+		[ SerializeField ] Renderer theRenderer;
 
 		static int SHADER_ID_COLOR = Shader.PropertyToID( "_BaseColor" );
 
-		Renderer theRenderer;
 		MaterialPropertyBlock propertyBlock;
 #endregion
 
@@ -24,15 +24,15 @@ namespace FFStudio
 #region Unity API
 		void Awake()
 		{
-			theRenderer = GetComponent< Renderer >();
+			// theRenderer = GetComponent< Renderer >();
 			propertyBlock = new MaterialPropertyBlock();
 		}
 
-		private void Start()
-		{
-			if( setOnAwake )
-				SetColor();
-		}
+		// private void Start()
+		// {
+		// 	if( setOnAwake )
+		// 		SetColor();
+		// }
 #endregion
 
 #region API
