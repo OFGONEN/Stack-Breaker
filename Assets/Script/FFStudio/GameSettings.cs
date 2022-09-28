@@ -11,7 +11,6 @@ namespace FFStudio
 #region Fields (Settings)
     // Info: You can use Title() attribute ONCE for every game-specific group of settings.
     [ Title( "Player" ) ]
-        [ LabelText( "Player Step Height" ) ] public float player_step_height = 0.5f;
         [ LabelText( "Player Input Activation Delay" ) ] public float player_input_activation_delay = 0.5f;
         [ LabelText( "Player Width Range" ) ] public Vector2 player_width_range;
         [ LabelText( "Player Ground Punch Vector" ) ] public Vector3 player_punch_ground_vector = new Vector3( 1, 1 ,1 );
