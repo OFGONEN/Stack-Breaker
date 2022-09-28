@@ -13,8 +13,10 @@ public class Stack : MonoBehaviour
 	static int SHADER_ID_COLOR = Shader.PropertyToID( "_BaseColor" );
 
 	MaterialPropertyBlock propertyBlock;
-
 	UnityMessage onBreakMethod;
+
+	List< Renderer > ground_renderers = new List< Renderer >(10);
+	List< Renderer > break_renderers = new List< Renderer >(10);
 #endregion
 
 #region Properties
@@ -51,7 +53,13 @@ public class Stack : MonoBehaviour
 #region Implementation
 	void Break()
 	{
+		for( var i = 0; i < ground_renderers.Count; i++ )
+			ground_renderers[ i ].enabled = false;
 
+		for( var i = 0; i < break_renderers.Count; i++ )
+		{
+			break_renderers[ i ].enabled = false;
+		}
 	}
 
     void SetGroundStackColor()
@@ -77,7 +85,11 @@ public class Stack : MonoBehaviour
         {
 			renderer.material = GameSettings.Instance.stack_break_material;
 			color             = CurrentLevelData.Instance.levelData.break_color;
+
+			break_renderers.Add( renderer );
 		}
+		else
+			ground_renderers.Add( renderer );
 
 		renderer.GetPropertyBlock( propertyBlock );
 
