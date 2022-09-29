@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7c996822a44483a9216393ca30f9ec, type: 3}
   m_Name: tool_creator
   m_EditorClassIdentifier: 
-  level_stack_count: 10
-  level_stack_buffer: 1.25
-  level_cylinder_scale_cofactor: 0.75
-  level_player_offset: -1
+  level_stack_count: 12
+  level_stack_buffer: 2
+  level_cylinder_scale_cofactor: 1
+  level_player_offset: -1.9
   level_stack_data:
     stack_gameObject: {fileID: 8863452889774262893, guid: 5d963e0819d26423cbc7a016ad7773ca, type: 3}
     stack_height: 0.35
@@ -30,5 +30,5 @@ MonoBehaviour:
   place_stack_parent: {fileID: 0}
   place_stack_data:
     stack_gameObject: {fileID: 92878162756054201, guid: 22aa05a390e0f4c2caa01dda52a34638, type: 3}
-    stack_count: 10
-    stack_angle: 36
+    stack_count: 12
+    stack_angle: 30
