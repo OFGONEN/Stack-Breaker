@@ -80,6 +80,19 @@ public class CreatorTool : ScriptableObject
     }
 
 	[ Button() ]
+	void SetPiecesAsBreak()
+	{
+		var selection = Selection.gameObjects;
+
+		for( var i = 0; i < selection.Length; i++ )
+		{
+			var gameObject = selection[ i ];
+			gameObject.layer = ExtensionMethods.Layer_Break;
+			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_break_material;
+		}
+	}
+
+	[ Button() ]
 	void RotateSelection( float angle )
 	{
 		var selection = Selection.activeGameObject.transform;
