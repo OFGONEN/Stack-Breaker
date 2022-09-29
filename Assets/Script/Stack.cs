@@ -15,8 +15,8 @@ public class Stack : MonoBehaviour
 	MaterialPropertyBlock propertyBlock;
 	UnityMessage onBreakMethod;
 
-	List< Renderer > ground_renderers = new List< Renderer >(10);
-	List< Renderer > break_renderers = new List< Renderer >(10);
+	List< Renderer > ground_renderers = new List< Renderer >( 10 );
+	List< Renderer > break_renderers = new List< Renderer >( 10 );
 #endregion
 
 #region Properties
