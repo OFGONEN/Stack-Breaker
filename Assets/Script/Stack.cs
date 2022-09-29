@@ -102,7 +102,6 @@ public class Stack : MonoBehaviour
 
 		var renderer = child.GetComponentInChildren< Renderer >();
 
-		renderer.material = GameSettings.Instance.stack_ground_final_material;
 		renderer.GetPropertyBlock( propertyBlock );
 
 		propertyBlock.SetColor( SHADER_ID_COLOR, CurrentLevelData.Instance.levelData.ground_final_color );

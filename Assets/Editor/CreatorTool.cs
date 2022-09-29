@@ -55,14 +55,25 @@ public class CreatorTool : ScriptableObject
 		float verticalPosition  = 0;
 		float lastStackPosition = 0;
 
-		for( var i = 0; i <= level_stack_count; i++ )
+		var stackGround = PrefabUtility.InstantiatePrefab( level_stack_data.stack_gameObject ) as GameObject;
+		stackGround.transform.SetParent( stackParent );
+		stackGround.transform.localPosition = Vector3.up * verticalPosition;
+		var renderers = stackGround.GetComponentsInChildren< Renderer >();
+
+		for( var i = 0; i < renderers.Length; i++ )
+			renderers[ i ].material = GameSettings.Instance.stack_ground_final_material;
+
+		lastStackPosition = verticalPosition;
+		verticalPosition += level_stack_buffer;
+
+		for( var i = 1; i <= level_stack_count; i++ )
         {
 			var stack = PrefabUtility.InstantiatePrefab( level_stack_data.stack_gameObject ) as GameObject;
 			stack.transform.SetParent( stackParent );
 			stack.transform.localPosition = Vector3.up * verticalPosition;
 
 			lastStackPosition  = verticalPosition;
-			verticalPosition  += level_stack_buffer + level_stack_data.stack_height;
+			verticalPosition  += level_stack_buffer;
 		}
 
 		cylinder.localScale = Vector3.one.SetY( verticalPosition * level_cylinder_scale_cofactor );
@@ -81,7 +92,7 @@ public class CreatorTool : ScriptableObject
 		collectable_last.Clear();
 
 		var collectableParent = GameObject.Find( "parent_collectable" ).transform;
-		var placeHeight = collectable_place_index * ( level_stack_data.stack_height + level_stack_buffer ) + collectable_data.collectable_step_height;
+		var placeHeight       = collectable_place_index * level_stack_buffer + collectable_data.collectable_step_height;
 
 		for( var i = 0; i < collectable_place_count; i++ )
 		{
