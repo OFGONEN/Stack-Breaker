@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 	[ SerializeField ] GameEvent event_level_failed;
 
   [ Title( "Components" ) ]
+    [ SerializeField ] Animator _animator;
     [ SerializeField ] Transform transform_punch;
     [ SerializeField ] Transform transform_width;
     [ SerializeField ] Rigidbody _rigidBody;
@@ -200,6 +201,8 @@ public class Player : MonoBehaviour
 	{
 		onInputFingerDown = ExtensionMethods.EmptyMethod;
 
+		_animator.SetBool( "run", false );
+
 		jump_collided_break = false;
 		jump_speed_cofactor = GameSettings.Instance.player_movement_rotate_cofactor_jumping;
 
@@ -218,6 +221,8 @@ public class Player : MonoBehaviour
 
 		_collider.enabled  = false;
 		transform.position = transform.position.SetY( current_position );
+
+		_animator.SetBool( "run", true );
 
 		DOVirtual.DelayedCall( GameSettings.Instance.player_input_activation_delay, SetFingerDownToJump );
 	}
@@ -241,6 +246,8 @@ public class Player : MonoBehaviour
 		onUpdateMethod      = ExtensionMethods.EmptyMethod;
 		onFixedUpdateMethod = FallDown;
 
+		_animator.SetTrigger( "fall" );
+
 		jump_speed_cofactor = 1f;
 		_collider.enabled   = true;
 	}
@@ -254,6 +261,8 @@ public class Player : MonoBehaviour
 	{
 		EmptyDelegates();
 		_collider.enabled = false;
+
+		_animator.SetTrigger( "victory" );
 
 		// spawn victory pfx
 		// Play victory animation
