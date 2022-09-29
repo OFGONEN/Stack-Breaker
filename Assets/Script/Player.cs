@@ -94,8 +94,10 @@ public class Player : MonoBehaviour
 		PunchScalePlayer_OnCollectable();
 	}
 
-	public void OnTrigger_Ground()
+	public void OnTrigger_Ground( Collider collider )
 	{
+		current_position = collider.transform.position.y;
+
 		if( transform.position.y <= GameSettings.Instance.player_level_complete_buffer )
 			LevelComplete();
 		else if( notif_input_finger_isPressing.sharedValue && !jump_collided_break )
@@ -118,6 +120,8 @@ public class Player : MonoBehaviour
 
 	public void OnTrigger_Break( Collider collider )
 	{
+		current_position = collider.transform.position.y;
+
 		if( notif_input_finger_isPressing.sharedValue )
 		{
 			collider.gameObject.SetActive( false );
@@ -127,14 +131,12 @@ public class Player : MonoBehaviour
 				LevelFailed();
 			else
 			{
-				current_position -= GameSettings.Instance.player_step_height;
 				PunchScalePlayer_OnGround();
-				//todo collider.GetComponent< Break >.Break();
+				collider.GetComponentInParent< Stack >().OnBreak(); // Stack
 			}
 		}
 		else
 			StartMovement();
-
 
 		FFLogger.PopUpText( transform.position + Vector3.up, "Break Trigger" );
 	}

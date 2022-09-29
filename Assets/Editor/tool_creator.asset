@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e7c996822a44483a9216393ca30f9ec, type: 3}
+  m_Name: tool_creator
+  m_EditorClassIdentifier: 
+  level_stack_count: 10
+  level_stack_buffer: 1.25
+  level_cylinder_scale_cofactor: 0.75
+  level_player_offset: -1
+  level_stack_data:
+    stack_gameObject: {fileID: 8863452889774262893, guid: 5d963e0819d26423cbc7a016ad7773ca, type: 3}
+    stack_height: 0.35
+  collectable_place_index: 5
+  collectable_place_count: 5
+  collectable_place_angle: 30
+  collectable_data:
+    collectable_gameObject: {fileID: 4279486396491071713, guid: a7c2cdc8cae378c4486d52065415ce66, type: 3}
+    collectable_place_offset: 1
+    collectable_step_height: 0.125
+    collectable_step_angle: 10
+  place_stack_parent: {fileID: 0}
+  place_stack_data:
+    stack_gameObject: {fileID: 92878162756054201, guid: 22aa05a390e0f4c2caa01dda52a34638, type: 3}
+    stack_count: 10
+    stack_angle: 36

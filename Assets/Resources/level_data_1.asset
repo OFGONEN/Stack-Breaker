@@ -17,5 +17,7 @@ MonoBehaviour:
   player_width_ratio: 0
   collectable_cofactor: 0.1
   break_cofactor: 0.25
-  ground_color: {r: 1, g: 1, b: 1, a: 1}
-  break_color: {r: 1, g: 0.7933164, b: 0, a: 1}
+  break_color: {r: 1, g: 0.83333325, b: 0, a: 1}
+  ground_color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+  ground_final_color: {r: 0.063780576, g: 0.5660378, b: 0, a: 1}
+  cylinder_color: {r: 0.2924528, g: 0, b: 0, a: 1}

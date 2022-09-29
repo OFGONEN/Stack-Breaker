@@ -37,6 +37,11 @@ namespace FFStudio
 
 		public abstract void Subscribe( DelegateType method );
 		public abstract void Unsubscribe( DelegateType method );
+
+		public void SetAttachedComponent( Component component )
+		{
+			attachedComponent = component;
+		}
 #endregion
 
 #region Implementation
