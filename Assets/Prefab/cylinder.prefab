@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5949258135371534749
 Transform:
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
   setOnAwake: 0
-  theRenderer: {fileID: 3971275595424118982}
+  theRenderer: {fileID: 8452212046099404707}
 --- !u!114 &7322423248714948986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,8 +125,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1687660660225889700, guid: 0b9f51e2838e042e7be2372b6dca42ca, type: 3}
   m_PrefabInstance: {fileID: 2451578431045547559}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &3971275595424118982 stripped
+--- !u!23 &8452212046099404707 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1520263413439401697, guid: 0b9f51e2838e042e7be2372b6dca42ca, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6289711783438639492, guid: 0b9f51e2838e042e7be2372b6dca42ca, type: 3}
   m_PrefabInstance: {fileID: 2451578431045547559}
   m_PrefabAsset: {fileID: 0}
