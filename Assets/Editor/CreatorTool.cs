@@ -79,9 +79,11 @@ public class CreatorTool : ScriptableObject
 		}
     }
 
-	[ Button() ]
-	void SetPiecesAsBreak()
+	[ Button(), MenuItem( "FFGame/Set Pieces As Break %#g" ) ]
+	static void SetPiecesAsBreak()
 	{
+		EditorSceneManager.MarkAllScenesDirty();
+
 		var selection = Selection.gameObjects;
 
 		for( var i = 0; i < selection.Length; i++ )
@@ -90,6 +92,8 @@ public class CreatorTool : ScriptableObject
 			gameObject.layer = ExtensionMethods.Layer_Break;
 			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_break_material;
 		}
+
+		AssetDatabase.SaveAssets();
 	}
 
 	[ Button() ]
