@@ -13,6 +13,7 @@ namespace FFStudio
     [ Title( "Player" ) ]
         [ LabelText( "Player Input Activation Delay" ) ] public float player_input_activation_delay = 0.5f;
         [ LabelText( "Player Width Range" ) ] public Vector2 player_width_range;
+        [ LabelText( "Player Width Curve" ) ] public AnimationCurve player_width_curve;
         [ LabelText( "Player Ground Punch Vector" ) ] public Vector3 player_punch_ground_vector = new Vector3( 1, 1 ,1 );
         [ LabelText( "Player Ground Punch Power" ) ] public float player_punch_ground_power = 1;
         [ LabelText( "Player Ground Punch Duration" ) ] public float player_punch_ground_duraion = 0.35f;
