@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
 		var scale = GameSettings.Instance.player_width_range.ReturnProgress( notif_player_width.sharedValue );
 
 		transform_width.localScale     = new Vector3( scale, 1, scale );
-		_collider.transform.localScale = new Vector3( scale, 1, scale );
+		// _collider.transform.localScale = new Vector3( scale, 1, scale );
 	}
 
 	void PunchScalePlayer_OnGround()
