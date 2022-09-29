@@ -83,9 +83,8 @@ public class Stack : MonoBehaviour
 
 		if( child.gameObject.layer == ExtensionMethods.Layer_Break )
         {
-			renderer.material = GameSettings.Instance.stack_break_material;
-			color             = CurrentLevelData.Instance.levelData.break_color;
-
+			// renderer.material = GameSettings.Instance.stack_break_material;
+			color = CurrentLevelData.Instance.levelData.break_color;
 			break_renderers.Add( renderer );
 		}
 		else
