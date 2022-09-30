@@ -9,6 +9,7 @@ using Sirenix.OdinInspector;
 public class Stack : MonoBehaviour
 {
 #region Fields
+	[ SerializeField ] ParticleSpawner _particleSpawner;
 
 	static int SHADER_ID_COLOR = Shader.PropertyToID( "_BaseColor" );
 
@@ -54,6 +55,8 @@ public class Stack : MonoBehaviour
 #region Implementation
 	void Break()
 	{
+		_particleSpawner.Spawn( 0 );
+
 		for( var i = 0; i < ground_renderers.Count; i++ )
 			ground_renderers[ i ].enabled = false;
 
