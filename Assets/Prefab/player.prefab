@@ -463,6 +463,7 @@ MonoBehaviour:
   notif_level_progress: {fileID: 11400000, guid: 43438d720c16f2e4aa5a19d520e1e15f, type: 2}
   event_level_complete: {fileID: 11400000, guid: 28d976b368abc004a924d98b1751a17d, type: 2}
   event_level_failed: {fileID: 11400000, guid: ec850936269bc2e47b26cfebd8bdad97, type: 2}
+  event_player_stack_break: {fileID: 11400000, guid: ccf63e1425d844e91b2d3adb61ae0bdc, type: 2}
   _animator: {fileID: 4187952899641462356}
   transform_punch: {fileID: 6680179662161041652}
   _skinnedMeshRenderer: {fileID: 1017137492255446903}

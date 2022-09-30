@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
   [ Title( "Fired Events" ) ]
 	[ SerializeField ] GameEvent event_level_complete;
 	[ SerializeField ] GameEvent event_level_failed;
+	[ SerializeField ] FloatGameEvent event_player_stack_break;
 
   [ Title( "Components" ) ]
     [ SerializeField ] Animator _animator;
@@ -136,7 +137,10 @@ public class Player : MonoBehaviour
 			else
 			{
 				PunchScalePlayer_OnGround();
-				collider.GetComponentInParent< Stack >().OnBreak(); // Stack
+				var stack = collider.GetComponentInParent< Stack >(); // Stack
+				stack.OnBreak();
+				event_player_stack_break.Raise( stack.transform.position.y );
+
 				_particleSpawnner.Spawn( 2 ); // Stack Break
 			}
 		}
