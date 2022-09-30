@@ -51,6 +51,14 @@ namespace FFStudio
             if( cylinderColorSetter != null )
 		        ( cylinderColorSetter as ColorSetter ).SetColor( CurrentLevelData.Instance.levelData.cylinder_color );
 		}
+        
+        public void OnStackBreakParticle( ReferenceGameEvent gameEvent )
+        {
+			var particle = gameEvent.eventValue as ParticleSystem;
+            
+            var main            = particle.main;
+                main.startColor = CurrentLevelData.Instance.levelData.particle_stack_break_color;
+		}
 #endregion
 
 #region Implementation
