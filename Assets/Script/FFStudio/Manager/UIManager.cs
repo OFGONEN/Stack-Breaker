@@ -19,7 +19,8 @@ namespace FFStudio
 
     [ Title( "UI Elements" ) ]
         public UI_Patrol_Scale level_loadingBar_Scale;
-        public TextMeshProUGUI level_count_text;
+        public TextMeshProUGUI level_count_text_start;
+        public TextMeshProUGUI level_count_text_end;
         public TextMeshProUGUI level_information_text;
         public UI_Patrol_Scale level_information_text_Scale;
         public Image loadingScreenImage;
@@ -69,14 +70,16 @@ namespace FFStudio
 								.Append( loadingScreenImage.DOFade( 0, GameSettings.Instance.ui_Entity_Fade_TweenDuration ) )
 								.AppendCallback( () => tapInputListener.response = StartLevel );
 
-			level_count_text.text = "Level " + CurrentLevelData.Instance.currentLevel_Shown;
+			level_count_text_start.text = CurrentLevelData.Instance.currentLevel_Shown.ToString();
+			level_count_text_end.text   = ( CurrentLevelData.Instance.currentLevel_Shown + 1 ).ToString();
 
             levelLoadedResponse.response = NewLevelLoaded;
         }
 
         private void NewLevelLoaded()
         {
-			level_count_text.text = "Level " + CurrentLevelData.Instance.currentLevel_Shown;
+            level_count_text_start.text = CurrentLevelData.Instance.currentLevel_Shown.ToString();
+			level_count_text_end.text   = ( CurrentLevelData.Instance.currentLevel_Shown + 1 ).ToString();
 
 			level_information_text.text = "Tap to Start";
 
