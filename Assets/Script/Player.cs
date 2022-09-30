@@ -272,7 +272,7 @@ public class Player : MonoBehaviour
 		_animator.SetTrigger( "victory" );
 
 		// spawn victory pfx
-		_particleSpawnner.Spawn( 1 );
+		// _particleSpawnner.Spawn( 1 ); // todo enable this
 
 		event_level_complete.Raise();
 	}
@@ -285,7 +285,7 @@ public class Player : MonoBehaviour
 		// disable gfx object
 		_skinnedMeshRenderer.enabled = false;
 		FFLogger.PopUpText( transform.position + Vector3.up / 2f, "Level Failed" );
-		_particleSpawnner.Spawn( 0 );
+		// _particleSpawnner.Spawn( 0 ); //todo enable this
 
 		event_level_failed.Raise();
 	}
