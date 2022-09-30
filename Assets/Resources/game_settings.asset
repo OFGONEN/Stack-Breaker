@@ -60,7 +60,7 @@ MonoBehaviour:
   camera_look_axis: {x: 1, y: 1, z: 0}
   camera_follow_speed_lateral: 20
   camera_follow_speed_vertical: 1
-  maxLevelCount: 1
+  maxLevelCount: 10
   useRemoteConfig_GameSettings: 0
   useRemoteConfig_Components: 0
   ui_Entity_Move_TweenDuration: 0.5

@@ -302,6 +302,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: gfx_collectable
       objectReference: {fileID: 0}
+    - target: {fileID: 7851458883338244916, guid: eb1d5230359e64116867d9e8646b9953, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 9152613754086229636, guid: eb1d5230359e64116867d9e8646b9953, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb1d5230359e64116867d9e8646b9953, type: 3}
 --- !u!4 &5897775015228535751 stripped

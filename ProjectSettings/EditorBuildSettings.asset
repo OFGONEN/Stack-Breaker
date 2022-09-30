@@ -9,9 +9,33 @@ EditorBuildSettings:
     path: Assets/Scenes/app.unity
     guid: ad0d37aebbbd4c54396618f1c151ebb7
   - enabled: 1
-    path: Assets/Scenes/game_template.unity
-    guid: c7e03bd5129fc4c36ac54c6e26a7669b
+    path: Assets/Scenes/game_1.unity
+    guid: 7fa8b54b146eb5348a88a077418008d2
   - enabled: 1
-    path: Assets/Test/test_physics_scene_template.unity
-    guid: f6d6d1cc999fec74c83da6a285824402
+    path: Assets/Scenes/game_2.unity
+    guid: 00d9006bf994b164f950fea47b038ee6
+  - enabled: 1
+    path: Assets/Scenes/game_3.unity
+    guid: 788b10e2f8625534aa24e5e314ab1cd5
+  - enabled: 1
+    path: Assets/Scenes/game_4.unity
+    guid: 47f0d18f15d3a174d86af2c35d223ac3
+  - enabled: 1
+    path: Assets/Scenes/game_5.unity
+    guid: a636250e3ec3e00488ca845f368a807b
+  - enabled: 1
+    path: Assets/Scenes/game_6.unity
+    guid: 85547367c0a56154b89a184d26d03a19
+  - enabled: 1
+    path: Assets/Scenes/game_7.unity
+    guid: 6f82ed5f11887dd48b8c9467aefdfd07
+  - enabled: 1
+    path: Assets/Scenes/game_8.unity
+    guid: ad681e40d75738a4d9a4e7359db72172
+  - enabled: 1
+    path: Assets/Scenes/game_9.unity
+    guid: 93d4c149fa27d1045b53efd547ca167b
+  - enabled: 1
+    path: Assets/Scenes/game_10.unity
+    guid: b796616b670f86145955f81e54d6bd09
   m_configObjects: {}
