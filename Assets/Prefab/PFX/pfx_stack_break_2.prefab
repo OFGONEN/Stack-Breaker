@@ -49,6 +49,21 @@ MonoBehaviour:
     gameEvents:
     - {fileID: 11400000, guid: ec850936269bc2e47b26cfebd8bdad97, type: 2}
     - {fileID: 11400000, guid: 28d976b368abc004a924d98b1751a17d, type: 2}
+  event_particle_spawn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b577320edf44547549c1570131e7c7e5, type: 2}
+        m_TargetAssemblyTypeName: FFStudio.ReferenceGameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2856177820366624532}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Component, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   alias: stack_break
 --- !u!1001 &2674287283321859598
 PrefabInstance:
@@ -110,5 +125,10 @@ PrefabInstance:
 --- !u!4 &2669577285641584060 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4719622769103794, guid: 7c626561d3012ee448c67a6f24e2b640, type: 3}
+  m_PrefabInstance: {fileID: 2674287283321859598}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2856177820366624532 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198110577194907930, guid: 7c626561d3012ee448c67a6f24e2b640, type: 3}
   m_PrefabInstance: {fileID: 2674287283321859598}
   m_PrefabAsset: {fileID: 0}
