@@ -51,4 +51,6 @@ MonoBehaviour:
   pools_pfx:
   - {fileID: 11400000, guid: e81b9c5b9116240ffb67f98a95479a7f, type: 2}
   - {fileID: 11400000, guid: 4012fdad9fdc94b1ebff7c620783e3a4, type: 2}
+  - {fileID: 11400000, guid: 59f64f8bc98234ec386935ce5d6f35f4, type: 2}
+  - {fileID: 11400000, guid: c82ba0c9190f449c89a8998a76f53238, type: 2}
   pools_pfx_random: []

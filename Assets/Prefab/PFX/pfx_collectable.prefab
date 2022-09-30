@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5679917334180051939}
   - component: {fileID: 979673564618936474}
   m_Layer: 0
-  m_Name: pfx_currency_collect
+  m_Name: pfx_collectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
     gameEvents:
     - {fileID: 11400000, guid: 28d976b368abc004a924d98b1751a17d, type: 2}
     - {fileID: 11400000, guid: ec850936269bc2e47b26cfebd8bdad97, type: 2}
-  alias: currency_collect
+  alias: collectable
 --- !u!1001 &1166200714854830582
 PrefabInstance:
   m_ObjectHideFlags: 0
