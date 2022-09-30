@@ -34,6 +34,7 @@ namespace FFStudio
 		public ParticleSpawnEvent particle_event;
 		public string alias;
 		public bool parent;
+		public bool offset_local;
 		public Vector3 offset;
 		public float size;
 	}
