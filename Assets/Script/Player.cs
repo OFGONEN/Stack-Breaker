@@ -285,7 +285,7 @@ public class Player : MonoBehaviour
 		// disable gfx object
 		_skinnedMeshRenderer.enabled = false;
 		FFLogger.PopUpText( transform.position + Vector3.up / 2f, "Level Failed" );
-		// _particleSpawnner.Spawn( 0 ); //todo enable this
+		_particleSpawnner.Spawn( 0 ); 
 
 		event_level_failed.Raise();
 	}
