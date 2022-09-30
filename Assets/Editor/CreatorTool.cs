@@ -13,6 +13,12 @@ using Sirenix.OdinInspector;
 public class CreatorTool : ScriptableObject
 {
 #region Fields
+    [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_1;
+    [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_2;
+    [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_3;
+    [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_4;
+
+
     [ FoldoutGroup( "Level Create" ), SerializeField ] int level_stack_count;
     [ FoldoutGroup( "Level Create" ), SerializeField ] float level_stack_buffer;
     [ FoldoutGroup( "Level Create" ), SerializeField ] float level_cylinder_scale_cofactor;
@@ -134,7 +140,7 @@ public class CreatorTool : ScriptableObject
 		}
     }
 
-	[ Button(), MenuItem( "FFGame/Set Pieces As Break %#g" ) ]
+	[ MenuItem( "FFGame/Set Pieces As Break %&b" ) ]
 	static void SetPiecesAsBreak()
 	{
 		EditorSceneManager.MarkAllScenesDirty();
@@ -146,6 +152,82 @@ public class CreatorTool : ScriptableObject
 			var gameObject = selection[ i ];
 			gameObject.layer = ExtensionMethods.Layer_Break;
 			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_break_material;
+		}
+
+		AssetDatabase.SaveAssets();
+	}
+
+	[ MenuItem( "FFGame/Set Pieces As Ground %&g" ) ]
+	static void SetPiecesAsGround()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+
+		var selection = Selection.gameObjects;
+
+		for( var i = 0; i < selection.Length; i++ )
+		{
+			var gameObject = selection[ i ];
+			gameObject.layer = ExtensionMethods.Layer_Ground;
+			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_ground_material;
+		}
+
+		AssetDatabase.SaveAssets();
+	}
+
+	[ MenuItem( "FFGame/Stack Pattern 1 %#1" ) ]
+	static void SetStackPattern_One()
+	{
+		var creatorTool = AssetDatabase.LoadAssetAtPath( "Assets/Editor/tool_creator.asset", typeof( CreatorTool ) ) as CreatorTool;
+		SetStackPattern( creatorTool.stack_pattern_1 );
+	}
+
+	[ MenuItem( "FFGame/Stack Pattern 2 %#2" ) ]
+	static void SetStackPattern_Two()
+	{
+		var creatorTool = AssetDatabase.LoadAssetAtPath( "Assets/Editor/tool_creator.asset", typeof( CreatorTool ) ) as CreatorTool;
+		SetStackPattern( creatorTool.stack_pattern_2 );
+	}
+
+	[ MenuItem( "FFGame/Stack Pattern 3 %#3" ) ]
+	static void SetStackPattern_Three()
+	{
+		var creatorTool = AssetDatabase.LoadAssetAtPath( "Assets/Editor/tool_creator.asset", typeof( CreatorTool ) ) as CreatorTool;
+		SetStackPattern( creatorTool.stack_pattern_3 );
+	}
+
+	[ MenuItem( "FFGame/Stack Pattern 4 %#4" ) ]
+	static void SetStackPattern_Four()
+	{
+		var creatorTool = AssetDatabase.LoadAssetAtPath( "Assets/Editor/tool_creator.asset", typeof( CreatorTool ) ) as CreatorTool;
+		SetStackPattern( creatorTool.stack_pattern_4 );
+	}
+
+	static void SetStackPattern( int[] array )
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+
+		var selection = Selection.activeGameObject.transform;
+
+		var stackComponent = selection.GetComponent<Stack>();
+
+		if( stackComponent == null )
+		{
+			FFLogger.LogError( "Select A Stack Object" );
+			return;
+		}
+
+		for( var i = 0; i < selection.childCount; i++ )
+		{
+			var gameObject = selection.GetChild( i ).gameObject;
+			gameObject.layer = ExtensionMethods.Layer_Ground;
+			gameObject.GetComponentInChildren<Renderer>().material = GameSettings.Instance.stack_ground_material;
+		}
+
+		for( var i = 0; i < array.Length; i++ )
+		{
+			var gameObject = selection.GetChild( array[ i ] ).gameObject;
+			gameObject.layer = ExtensionMethods.Layer_Break;
+			gameObject.GetComponentInChildren<Renderer>().material = GameSettings.Instance.stack_break_material;
 		}
 
 		AssetDatabase.SaveAssets();
