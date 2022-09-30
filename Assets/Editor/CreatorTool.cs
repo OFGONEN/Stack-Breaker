@@ -167,7 +167,8 @@ public class CreatorTool : ScriptableObject
 		for( var i = 0; i < selection.Length; i++ )
 		{
 			var gameObject = selection[ i ];
-			gameObject.layer = ExtensionMethods.Layer_Break;
+			// gameObject.layer = ExtensionMethods.Layer_Break;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Break );
 			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_break_material;
 		}
 
@@ -184,7 +185,8 @@ public class CreatorTool : ScriptableObject
 		for( var i = 0; i < selection.Length; i++ )
 		{
 			var gameObject = selection[ i ];
-			gameObject.layer = ExtensionMethods.Layer_Ground;
+			// gameObject.layer = ExtensionMethods.Layer_Ground;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Ground );
 			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_ground_material;
 		}
 
@@ -236,14 +238,16 @@ public class CreatorTool : ScriptableObject
 		for( var i = 0; i < selection.childCount; i++ )
 		{
 			var gameObject = selection.GetChild( i ).gameObject;
-			gameObject.layer = ExtensionMethods.Layer_Ground;
+			// gameObject.layer = ExtensionMethods.Layer_Ground;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Ground );
 			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_ground_material;
 		}
 
 		for( var i = 0; i < array.Length; i++ )
 		{
 			var gameObject = selection.GetChild( array[ i ] ).gameObject;
-			gameObject.layer = ExtensionMethods.Layer_Break;
+			// gameObject.layer = ExtensionMethods.Layer_Break;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Break );
 			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_break_material;
 		}
 
@@ -257,14 +261,16 @@ public class CreatorTool : ScriptableObject
 		for( var i = 0; i < stack.childCount; i++ )
 		{
 			var gameObject = stack.GetChild( i ).gameObject;
-			gameObject.layer = ExtensionMethods.Layer_Ground;
+			// gameObject.layer = ExtensionMethods.Layer_Ground;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Ground );
 			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_ground_material;
 		}
 
 		for( var i = 0; i < array.Length; i++ )
 		{
 			var gameObject = stack.GetChild( array[ i ] ).gameObject;
-			gameObject.layer = ExtensionMethods.Layer_Break;
+			// gameObject.layer = ExtensionMethods.Layer_Break;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Break );
 			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_break_material;
 		}
 
