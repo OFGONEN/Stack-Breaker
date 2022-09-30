@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 using System.IO;
 using System.Collections;
+using static UnityEngine.ParticleSystem;
 
 namespace FFStudio
 {
@@ -21,7 +22,7 @@ namespace FFStudio
         [ LabelText( "Ground Color" ) ] public Color ground_color;
         [ LabelText( "Ground Final Color" ) ] public Color ground_final_color;
         [ LabelText( "Cylinder Color" ) ] public Color cylinder_color;
-        [ LabelText( "Particle Stack Break Color" ) ] public Color particle_stack_break_color;
+        [ LabelText( "Particle Stack Break Color" ) ] public MinMaxGradient particle_stack_break_color;
 
 #if UNITY_EDITOR
 		static IEnumerable SceneList()
