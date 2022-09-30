@@ -13,6 +13,13 @@ using Sirenix.OdinInspector;
 public class CreatorTool : ScriptableObject
 {
 #region Fields
+    [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int stack_pattern_count;
+    [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_1;
+    [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_2;
+    [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_3;
+    [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_4;
+
+
     [ FoldoutGroup( "Level Create" ), SerializeField ] int level_stack_count;
     [ FoldoutGroup( "Level Create" ), SerializeField ] float level_stack_buffer;
     [ FoldoutGroup( "Level Create" ), SerializeField ] float level_cylinder_scale_cofactor;
@@ -59,9 +66,13 @@ public class CreatorTool : ScriptableObject
 		stackGround.transform.SetParent( stackParent );
 		stackGround.transform.localPosition = Vector3.up * verticalPosition;
 		var renderers = stackGround.GetComponentsInChildren< Renderer >();
+		var colliders = stackGround.GetComponentsInChildren< Collider >();
 
 		for( var i = 0; i < renderers.Length; i++ )
 			renderers[ i ].material = GameSettings.Instance.stack_ground_final_material;
+
+		// for( var i = 0; i < colliders.Length; i++ )
+		// 	colliders[ i ].enabled = false;
 
 		lastStackPosition = verticalPosition;
 		verticalPosition += level_stack_buffer;
@@ -83,6 +94,18 @@ public class CreatorTool : ScriptableObject
 		Camera.main.GetComponent< CameraFollow >().ResetPosition();
 
 		AssetDatabase.SaveAssets();
+	}
+
+	[ Button() ]
+	void ConfigurePattern()
+	{
+		var stackParent = GameObject.Find( "parent_stack" ).transform;
+
+		for( var i = 1; i < stackParent.childCount; i++ )
+		{
+			var stack = stackParent.GetChild( i );
+			SetStackPattern( stack, ReturnRandomPatternArray() );
+		}
 	}
 
 	[ Button() ]
@@ -134,7 +157,7 @@ public class CreatorTool : ScriptableObject
 		}
     }
 
-	[ Button(), MenuItem( "FFGame/Set Pieces As Break %#g" ) ]
+	[ MenuItem( "FFGame/Set Pieces As Break %&b" ) ]
 	static void SetPiecesAsBreak()
 	{
 		EditorSceneManager.MarkAllScenesDirty();
@@ -144,9 +167,114 @@ public class CreatorTool : ScriptableObject
 		for( var i = 0; i < selection.Length; i++ )
 		{
 			var gameObject = selection[ i ];
-			gameObject.layer = ExtensionMethods.Layer_Break;
+			// gameObject.layer = ExtensionMethods.Layer_Break;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Break );
 			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_break_material;
 		}
+
+		AssetDatabase.SaveAssets();
+	}
+
+	[ MenuItem( "FFGame/Set Pieces As Ground %&g" ) ]
+	static void SetPiecesAsGround()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+
+		var selection = Selection.gameObjects;
+
+		for( var i = 0; i < selection.Length; i++ )
+		{
+			var gameObject = selection[ i ];
+			// gameObject.layer = ExtensionMethods.Layer_Ground;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Ground );
+			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_ground_material;
+		}
+
+		AssetDatabase.SaveAssets();
+	}
+
+	[ MenuItem( "FFGame/Stack Pattern 1 %#1" ) ]
+	static void SetStackPattern_One()
+	{
+		var creatorTool = AssetDatabase.LoadAssetAtPath( "Assets/Editor/tool_creator.asset", typeof( CreatorTool ) ) as CreatorTool;
+		SetStackPattern( creatorTool.stack_pattern_1 );
+	}
+
+	[ MenuItem( "FFGame/Stack Pattern 2 %#2" ) ]
+	static void SetStackPattern_Two()
+	{
+		var creatorTool = AssetDatabase.LoadAssetAtPath( "Assets/Editor/tool_creator.asset", typeof( CreatorTool ) ) as CreatorTool;
+		SetStackPattern( creatorTool.stack_pattern_2 );
+	}
+
+	[ MenuItem( "FFGame/Stack Pattern 3 %#3" ) ]
+	static void SetStackPattern_Three()
+	{
+		var creatorTool = AssetDatabase.LoadAssetAtPath( "Assets/Editor/tool_creator.asset", typeof( CreatorTool ) ) as CreatorTool;
+		SetStackPattern( creatorTool.stack_pattern_3 );
+	}
+
+	[ MenuItem( "FFGame/Stack Pattern 4 %#4" ) ]
+	static void SetStackPattern_Four()
+	{
+		var creatorTool = AssetDatabase.LoadAssetAtPath( "Assets/Editor/tool_creator.asset", typeof( CreatorTool ) ) as CreatorTool;
+		SetStackPattern( creatorTool.stack_pattern_4 );
+	}
+
+	static void SetStackPattern( int[] array )
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+
+		var selection = Selection.activeGameObject.transform;
+
+		var stackComponent = selection.GetComponent<Stack>();
+
+		if( stackComponent == null )
+		{
+			FFLogger.LogError( "Select A Stack Object" );
+			return;
+		}
+
+		for( var i = 0; i < selection.childCount; i++ )
+		{
+			var gameObject = selection.GetChild( i ).gameObject;
+			// gameObject.layer = ExtensionMethods.Layer_Ground;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Ground );
+			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_ground_material;
+		}
+
+		for( var i = 0; i < array.Length; i++ )
+		{
+			var gameObject = selection.GetChild( array[ i ] ).gameObject;
+			// gameObject.layer = ExtensionMethods.Layer_Break;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Break );
+			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_break_material;
+		}
+
+		AssetDatabase.SaveAssets();
+	}
+
+	static void SetStackPattern( Transform stack, int[] array )
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+
+		for( var i = 0; i < stack.childCount; i++ )
+		{
+			var gameObject = stack.GetChild( i ).gameObject;
+			// gameObject.layer = ExtensionMethods.Layer_Ground;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Ground );
+			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_ground_material;
+		}
+
+		for( var i = 0; i < array.Length; i++ )
+		{
+			var gameObject = stack.GetChild( array[ i ] ).gameObject;
+			// gameObject.layer = ExtensionMethods.Layer_Break;
+			gameObject.SetAllChildrenLayer( ExtensionMethods.Layer_Break );
+			gameObject.GetComponentInChildren< Renderer >().material = GameSettings.Instance.stack_break_material;
+		}
+
+		stack.localEulerAngles = Vector3.up * UnityEngine.Random.Range( 0f, 360f );
 
 		AssetDatabase.SaveAssets();
 	}
@@ -156,6 +284,22 @@ public class CreatorTool : ScriptableObject
 	{
 		var selection = Selection.activeGameObject.transform;
 		selection.RotateAround( Vector3.up.SetY( selection.position.y ), Vector3.up, angle );
+	}
+
+	int[] ReturnRandomPatternArray()
+	{
+		int random = UnityEngine.Random.Range( 0, stack_pattern_count );
+
+		FFLogger.Log( "Random: " + random );
+
+		switch( random )
+		{
+			case 0: return stack_pattern_1;
+			case 1: return stack_pattern_2;
+			case 2: return stack_pattern_3;
+			case 3: return stack_pattern_4;
+			default: return stack_pattern_1;
+		}
 	}
 #endregion
 

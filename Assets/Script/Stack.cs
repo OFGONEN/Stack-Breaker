@@ -9,14 +9,16 @@ using Sirenix.OdinInspector;
 public class Stack : MonoBehaviour
 {
 #region Fields
+	[ SerializeField ] ParticleSpawner _particleSpawner;
 
 	static int SHADER_ID_COLOR = Shader.PropertyToID( "_BaseColor" );
 
 	MaterialPropertyBlock propertyBlock;
 	UnityMessage onBreakMethod;
 
-	List< Renderer > ground_renderers = new List< Renderer >( 10 );
-	List< Renderer > break_renderers = new List< Renderer >( 10 );
+	List< Collider > stack_colliders = new List< Collider >( 12 );
+	List< Renderer > ground_renderers = new List< Renderer >( 12 );
+	List< Renderer > break_renderers = new List< Renderer >( 12 );
 #endregion
 
 #region Properties
@@ -53,6 +55,8 @@ public class Stack : MonoBehaviour
 #region Implementation
 	void Break()
 	{
+		_particleSpawner.Spawn( 0 );
+
 		for( var i = 0; i < ground_renderers.Count; i++ )
 			ground_renderers[ i ].enabled = false;
 
@@ -60,6 +64,9 @@ public class Stack : MonoBehaviour
 		{
 			break_renderers[ i ].enabled = false;
 		}
+
+		for( var i = 0; i < stack_colliders.Count; i++ )
+			stack_colliders[ i ].enabled = false;
 	}
 
     void SetGroundStackColor()
@@ -79,7 +86,10 @@ public class Stack : MonoBehaviour
 		propertyBlock.Clear();
 
 		var renderer = child.GetComponentInChildren< Renderer >();
+		var collider = child.GetComponentInChildren< Collider >();
 		var color    = CurrentLevelData.Instance.levelData.ground_color;
+
+		stack_colliders.Add( collider );
 
 		if( child.gameObject.layer == ExtensionMethods.Layer_Break )
         {

@@ -35,6 +35,7 @@ namespace FFStudio
 
     [ Title( "Stack" ) ]
         [ LabelText( "Stack Break Material" ) ] public Material stack_break_material;
+        [ LabelText( "Stack Ground Material" ) ] public Material stack_ground_material;
         [ LabelText( "Stack Ground Final Material" ) ] public Material stack_ground_final_material;
 
     [ Title( "Camera" ) ]

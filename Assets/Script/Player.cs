@@ -105,10 +105,12 @@ public class Player : MonoBehaviour
 		else if( notif_input_finger_isPressing.sharedValue && !jump_collided_break )
 		{
 			var supposedWidth = DecreasePlayerWidth( CurrentLevelData.Instance.levelData.break_cofactor );
+
 			if( supposedWidth < 0 )
 				LevelFailed();
 			else
 			{
+				_particleSpawnner.Spawn( 1 );
 				PunchScalePlayer_OnGround();
 				StartMovement();
 			}
@@ -135,6 +137,7 @@ public class Player : MonoBehaviour
 			{
 				PunchScalePlayer_OnGround();
 				collider.GetComponentInParent< Stack >().OnBreak(); // Stack
+				_particleSpawnner.Spawn( 2 ); // Stack Break
 			}
 		}
 		else
@@ -271,9 +274,6 @@ public class Player : MonoBehaviour
 		// Play victory animation
 		_animator.SetTrigger( "victory" );
 
-		// spawn victory pfx
-		_particleSpawnner.Spawn( 1 );
-
 		event_level_complete.Raise();
 	}
 
@@ -285,7 +285,7 @@ public class Player : MonoBehaviour
 		// disable gfx object
 		_skinnedMeshRenderer.enabled = false;
 		FFLogger.PopUpText( transform.position + Vector3.up / 2f, "Level Failed" );
-		_particleSpawnner.Spawn( 0 );
+		_particleSpawnner.Spawn( 0 ); 
 
 		event_level_failed.Raise();
 	}

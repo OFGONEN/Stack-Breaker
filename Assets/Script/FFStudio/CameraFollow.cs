@@ -82,7 +82,7 @@ namespace FFStudio
 			var player = GameObject.FindGameObjectWithTag( "Player" ).transform;
 
 			transform.position = player.TransformPoint( GameSettings.Instance.camera_follow_offset );
-			transform.LookAtAxis( player.GetChild( 3 ).position, GameSettings.Instance.camera_look_axis );
+			transform.LookAtAxis( player.GetChild( 5 ).position, GameSettings.Instance.camera_look_axis );
 		}
 #endif
 #endregion

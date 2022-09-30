@@ -12,19 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7c996822a44483a9216393ca30f9ec, type: 3}
   m_Name: tool_creator
   m_EditorClassIdentifier: 
-  level_stack_count: 12
+  stack_pattern_count: 4
+  stack_pattern_1: 000000000100000002000000
+  stack_pattern_2: 000000000100000004000000050000000800000009000000
+  stack_pattern_3: 00000000010000000600000007000000
+  stack_pattern_4: 02000000030000000a0000000b000000
+  level_stack_count: 20
   level_stack_buffer: 2
   level_cylinder_scale_cofactor: 1
   level_player_offset: -1.9
   level_stack_data:
     stack_gameObject: {fileID: 8863452889774262893, guid: 5d963e0819d26423cbc7a016ad7773ca, type: 3}
     stack_height: 0.35
-  collectable_place_index: 5
-  collectable_place_count: 5
-  collectable_place_angle: 30
+  collectable_place_index: 1
+  collectable_place_count: 3
+  collectable_place_angle: 120
   collectable_data:
     collectable_gameObject: {fileID: 4279486396491071713, guid: a7c2cdc8cae378c4486d52065415ce66, type: 3}
-    collectable_place_offset: 1
+    collectable_place_offset: 2
     collectable_step_height: 0.125
     collectable_step_angle: 10
   place_stack_parent: {fileID: 0}

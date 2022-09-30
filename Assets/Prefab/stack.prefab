@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7580998443388355032}
   - component: {fileID: 752525425969840827}
+  - component: {fileID: 7043548991287694123}
   m_Layer: 0
   m_Name: stack
   m_TagString: Untagged
@@ -56,6 +57,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e952e451cc2343aaa589c70f8310a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particleSpawner: {fileID: 7043548991287694123}
+--- !u!114 &7043548991287694123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863452889774262893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f753b2c2b78147c181c65650f11a67d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleDatas:
+  - particle_event: {fileID: 11400000, guid: fe240f220ab36cc44923227184f9c2a7, type: 2}
+    alias: stack_fall
+    parent: 0
+    offset_local: 0
+    offset: {x: 0, y: 0, z: 0}
+    size: 1
 --- !u!1001 &1608985966296937883
 PrefabInstance:
   m_ObjectHideFlags: 0
