@@ -56,7 +56,7 @@ MonoBehaviour:
   stack_break_material: {fileID: 2100000, guid: edb23a0f1cdc64a09b20a50ae8a456d7, type: 2}
   stack_ground_material: {fileID: 2100000, guid: 4dcc6c4906e7a4610975ac286a5dc538, type: 2}
   stack_ground_final_material: {fileID: 2100000, guid: 81e5bb1c1e32448ce943ef86ecc9346e, type: 2}
-  camera_follow_offset: {x: 5, y: 4, z: 0}
+  camera_follow_offset: {x: 6, y: 4.5, z: 0}
   camera_look_axis: {x: 1, y: 1, z: 0}
   camera_follow_speed_lateral: 20
   camera_follow_speed_vertical: 1
