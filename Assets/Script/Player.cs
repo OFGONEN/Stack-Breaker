@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 	[ SerializeField ] SharedBoolNotifier notif_input_finger_isPressing;
 	[ SerializeField ] SharedFloatNotifier notif_player_width;
 	[ SerializeField ] SharedFloatNotifier notif_level_progress;
+	[ SerializeField ] SharedIntNotifier notif_player_stack;
 
   [ Title( "Fired Events" ) ]
 	[ SerializeField ] GameEvent event_level_complete;
@@ -152,6 +153,11 @@ public class Player : MonoBehaviour
 #endregion
 
 #region Implementation
+	void UpdatePlayerStackCount()
+	{
+		var stack = Mathf.FloorToInt( notif_player_width.sharedValue / CurrentLevelData.Instance.levelData.break_cofactor );
+		notif_player_stack.SetValue_NotifyAlways( stack );
+	}
 	void IncreasePlayerWidth( float value )
 	{
 		notif_player_width.SharedValue = Mathf.Clamp( notif_player_width.sharedValue + value,
@@ -187,6 +193,7 @@ public class Player : MonoBehaviour
 
 		_skinnedMeshRenderer.SetBlendShapeWeight( 0, scale );
 		// _collider.transform.localScale = new Vector3( scale, 1, scale );
+		UpdatePlayerStackCount();
 	}
 
 	void PunchScalePlayer_OnGround()

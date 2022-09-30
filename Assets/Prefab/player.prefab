@@ -461,6 +461,7 @@ MonoBehaviour:
   notif_input_finger_isPressing: {fileID: 11400000, guid: ef537f151366642e098cf02d22efc8ba, type: 2}
   notif_player_width: {fileID: 11400000, guid: bae8dfc11837142d09bca43e9969df7f, type: 2}
   notif_level_progress: {fileID: 11400000, guid: 43438d720c16f2e4aa5a19d520e1e15f, type: 2}
+  notif_player_stack: {fileID: 11400000, guid: 9bfdbabb3da0f514aa9787bdfe696ba6, type: 2}
   event_level_complete: {fileID: 11400000, guid: 28d976b368abc004a924d98b1751a17d, type: 2}
   event_level_failed: {fileID: 11400000, guid: ec850936269bc2e47b26cfebd8bdad97, type: 2}
   event_player_stack_break: {fileID: 11400000, guid: ccf63e1425d844e91b2d3adb61ae0bdc, type: 2}
