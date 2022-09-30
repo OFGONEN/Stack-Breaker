@@ -8,5 +8,11 @@ namespace FFStudio
     public class ReferenceGameEvent : GameEvent
     {
         public object eventValue;
+
+        public void Raise( Component value )
+        {
+			eventValue = value;
+			Raise();
+		}
     }
 }
