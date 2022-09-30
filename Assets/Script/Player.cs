@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
 				LevelFailed();
 			else
 			{
-				PunchScalePlayer_OnGround();
+				PunchScalePlayer_OnCollectable();
 				var stack = collider.GetComponentInParent< Stack >(); // Stack
 				stack.OnBreak();
 				event_player_stack_break.Raise( stack.transform.position.y );
