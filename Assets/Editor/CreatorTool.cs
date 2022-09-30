@@ -13,12 +13,14 @@ using Sirenix.OdinInspector;
 public class CreatorTool : ScriptableObject
 {
 #region Fields
+    [ FoldoutGroup( "Level Configure" ), SerializeField ] CollectablePatternData[] collectable_pattern_data;
+    [ FoldoutGroup( "Level Configure" ), SerializeField, Range( 0f, 1f ) ] float level_hard;
+
     [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int stack_pattern_count;
     [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_1;
     [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_2;
     [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_3;
     [ FoldoutGroup( "Stack Pattern" ), SerializeField ] int[] stack_pattern_4;
-
 
     [ FoldoutGroup( "Level Create" ), SerializeField ] int level_stack_count;
     [ FoldoutGroup( "Level Create" ), SerializeField ] float level_stack_buffer;
@@ -105,6 +107,48 @@ public class CreatorTool : ScriptableObject
 		{
 			var stack = stackParent.GetChild( i );
 			SetStackPattern( stack, ReturnRandomPatternArray() );
+		}
+	}
+
+	[ Button() ]
+	void ConfigureCollectablePattern()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "parent_collectable" ).transform;
+		collectableParent.DestroyAllChildren();
+
+		var stackParent = GameObject.Find( "parent_stack" ).transform;
+
+		for( var i = 1; i < stackParent.childCount; i++ )
+		{
+			var random = UnityEngine.Random.Range( 0f, 1f );
+
+			if( random >= level_hard )
+				PlaceRandomCollectablePatternAtIndex( i );
+		}
+
+
+		AssetDatabase.SaveAssets();
+	}
+
+	[ Button() ]
+	void PlaceRandomCollectablePatternAtIndex( int index )
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "parent_collectable" ).transform;
+		var placeHeight = index * level_stack_buffer + collectable_data.collectable_step_height;
+
+		var randomPattern = collectable_pattern_data.ReturnRandom().collectable_angle_array;
+
+		var randomAngle = UnityEngine.Random.Range( 0f, 360f );
+
+		for( var i = 0; i < randomPattern.Length; i++ )
+		{
+			var collectable = PrefabUtility.InstantiatePrefab( collectable_data.collectable_gameObject ) as GameObject;
+			collectable.transform.position = Vector3.up * placeHeight + Vector3.right * collectable_data.collectable_place_offset;
+			collectable.transform.SetParent( collectableParent );
+
+			collectable.transform.RotateAround( Vector3.up * placeHeight, Vector3.up, randomPattern[ i ] + randomAngle );
 		}
 	}
 
@@ -331,4 +375,10 @@ public struct CollectableData
     public float collectable_place_offset;
 	public float collectable_step_height;
 	public float collectable_step_angle;
+}
+
+[ Serializable ]
+public struct CollectablePatternData
+{
+	public float[] collectable_angle_array;
 }
