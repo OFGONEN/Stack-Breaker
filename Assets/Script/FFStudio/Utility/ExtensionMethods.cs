@@ -479,7 +479,17 @@ namespace FFStudio
 			return Mathf.Clamp( value, vector.x, vector.y );
 		}
 
-		public static void SetAllChildrenLayer( Transform parent, int layer )
+		public static void SetAllChildrenLayer( this Transform parent, int layer )
+		{
+			var childs = parent.GetComponentsInChildren< Transform >();
+
+			for( var i = 0; i < childs.Length; i++ )
+			{
+				childs[ i ].gameObject.layer = layer;
+			}
+		}
+
+		public static void SetAllChildrenLayer( this GameObject parent, int layer )
 		{
 			var childs = parent.GetComponentsInChildren< Transform >();
 
