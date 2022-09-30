@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 482801534404006244}
   - component: {fileID: 2791468017110885857}
+  - component: {fileID: 6290021329914849453}
   m_Layer: 28
   m_Name: collectable_1
   m_TagString: Untagged
@@ -54,6 +55,18 @@ MonoBehaviour:
     offset_local: 0
     offset: {x: 0, y: 0.45, z: 0}
     size: 1
+--- !u!114 &6290021329914849453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279486396491071713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 247d1360da2a040abb85894aef4cf9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5865212247605852615
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +224,24 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventListener:
+      gameEvents:
+      - {fileID: 11400000, guid: ccf63e1425d844e91b2d3adb61ae0bdc, type: 2}
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6290021329914849453}
+          m_TargetAssemblyTypeName: Collectable, Assembly-CSharp
+          m_MethodName: OnStackBreak
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: ccf63e1425d844e91b2d3adb61ae0bdc, type: 2}
+            m_ObjectArgumentAssemblyTypeName: FFStudio.FloatGameEvent, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
