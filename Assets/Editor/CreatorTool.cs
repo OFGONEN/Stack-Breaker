@@ -71,8 +71,8 @@ public class CreatorTool : ScriptableObject
 		for( var i = 0; i < renderers.Length; i++ )
 			renderers[ i ].material = GameSettings.Instance.stack_ground_final_material;
 
-		for( var i = 0; i < colliders.Length; i++ )
-			colliders[ i ].enabled = false;
+		// for( var i = 0; i < colliders.Length; i++ )
+		// 	colliders[ i ].enabled = false;
 
 		lastStackPosition = verticalPosition;
 		verticalPosition += level_stack_buffer;
