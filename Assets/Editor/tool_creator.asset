@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7c996822a44483a9216393ca30f9ec, type: 3}
   m_Name: tool_creator
   m_EditorClassIdentifier: 
+  stack_pattern_count: 4
   stack_pattern_1: 000000000100000002000000
   stack_pattern_2: 000000000100000004000000050000000800000009000000
   stack_pattern_3: 00000000010000000600000007000000
   stack_pattern_4: 02000000030000000a0000000b000000
-  level_stack_count: 12
+  level_stack_count: 20
   level_stack_buffer: 2
   level_cylinder_scale_cofactor: 1
   level_player_offset: -1.9
