@@ -1,6 +1,7 @@
 /* Created by and for usage of FF Studios (2021). */
 
 using UnityEngine;
+using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
 namespace FFStudio
@@ -10,6 +11,7 @@ namespace FFStudio
 #region Fields
 	[ Title( "Setup" ) ]
 		public MultipleEventListenerDelegateResponse level_finish_listener;
+		public UnityEvent event_particle_spawn;
 		public string alias;
 
 		ParticleEffectPool particle_pool;
@@ -73,6 +75,7 @@ namespace FFStudio
 				level_finish_listener.response = OnParticleSystemStopped;
 			}
 
+			event_particle_spawn.Invoke();
 			particles.Play();
 		}
 
@@ -90,6 +93,7 @@ namespace FFStudio
 				level_finish_listener.response = OnParticleSystemStopped;
 			}
 
+			event_particle_spawn.Invoke();
 			particles.Play();
 		}
 #endregion
