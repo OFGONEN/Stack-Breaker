@@ -499,7 +499,20 @@ MonoBehaviour:
   - particle_event: {fileID: 11400000, guid: fe240f220ab36cc44923227184f9c2a7, type: 2}
     alias: death
     parent: 0
+    offset_local: 0
     offset: {x: 0, y: 1, z: 0}
+    size: 1
+  - particle_event: {fileID: 11400000, guid: fe240f220ab36cc44923227184f9c2a7, type: 2}
+    alias: player_fall
+    parent: 0
+    offset_local: 0
+    offset: {x: 0, y: 0.3, z: 0}
+    size: 1
+  - particle_event: {fileID: 11400000, guid: fe240f220ab36cc44923227184f9c2a7, type: 2}
+    alias: stack_break
+    parent: 0
+    offset_local: 0
+    offset: {x: 0, y: 0, z: 0}
     size: 1
 --- !u!1001 &6933177009541893688
 PrefabInstance:
