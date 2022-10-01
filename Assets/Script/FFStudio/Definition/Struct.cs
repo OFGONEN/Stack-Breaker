@@ -34,6 +34,7 @@ namespace FFStudio
 		public ParticleSpawnEvent particle_event;
 		public string alias;
 		public bool parent;
+		public bool offset_local;
 		public Vector3 offset;
 		public float size;
 	}
@@ -140,4 +141,12 @@ namespace FFStudio
 		public Color color;
 		[ MappedFloat ] public float threshold;
 	}
+	
+	[ Serializable ]
+	public struct CollisionRespondData
+	{
+		[ Layer() ] public int collision_layer;
+		public UnityEvent< Collider > collision_event;
+	}
+
 }

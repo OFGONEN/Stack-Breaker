@@ -5,85 +5,86 @@ using Sirenix.OdinInspector;
 
 namespace FFStudio
 {
-    public class CameraFollow : MonoBehaviour
-    {
+	public class CameraFollow : MonoBehaviour
+	{
 #region Fields
-    [ Title( "Event Listeners" ) ]
-        [ SerializeField ] EventListenerDelegateResponse levelRevealEventListener;
-        [ SerializeField ] MultipleEventListenerDelegateResponse levelEndEventListener;
-        
-    [ Title( "Setup" ) ]
-        [ SerializeField ] SharedReferenceNotifier notifier_reference_transform_target;
+		[ Title( "Setup" ) ]
+		[ SerializeField ] SharedReferenceNotifier notif_target_follow_reference;
+		[ SerializeField ] SharedReferenceNotifier notif_target_look_reference;
 
-        Transform transform_target;
-        Vector3 followOffset;
+		UnityMessage onUpdateMethod;
 
-        UnityMessage updateMethod;
+		Transform target_transform_follow;
+		Transform target_transform_look;
+		Vector3 target_offset;
 #endregion
 
 #region Properties
 #endregion
 
 #region Unity API
-        void OnEnable()
-        {
-            levelRevealEventListener.OnEnable();
-            levelEndEventListener.OnEnable();
-        }
+		private void Awake()
+		{
+			onUpdateMethod = ExtensionMethods.EmptyMethod;
+		}
 
-        void OnDisable()
-        {
-            levelRevealEventListener.OnDisable();
-            levelEndEventListener.OnDisable();
-        }
-
-        void Awake()
-        {
-            levelRevealEventListener.response = LevelRevealedResponse;
-            levelEndEventListener.response    = LevelCompleteResponse;
-
-            updateMethod = ExtensionMethods.EmptyMethod;
-        }
-
-        void Update()
-        {
-            updateMethod();
-        }
+		private void Update()
+		{
+			onUpdateMethod();
+		}
 #endregion
 
 #region API
+		public void OnLevelStarted()
+		{
+			target_offset           = GameSettings.Instance.camera_follow_offset;
+			target_transform_follow = notif_target_follow_reference.sharedValue as Transform;
+			target_transform_look   = notif_target_look_reference.sharedValue as Transform;
+
+			onUpdateMethod = FollowTarget;
+		}
+
+		public void OnLevelFinished()
+		{
+			onUpdateMethod = ExtensionMethods.EmptyMethod;
+		}
 #endregion
 
 #region Implementation
-        void LevelRevealedResponse()
-        {
-            transform_target = notifier_reference_transform_target.SharedValue as Transform;
+		void FollowTarget()
+		{
+			SetPosition();
+			transform.LookAtAxis( target_transform_look.position, GameSettings.Instance.camera_look_axis );
+		}
 
-            followOffset = transform_target.position - transform.position;
+		void SetPosition()
+		{
+			var position = transform.position;
+			var targetPosition = target_transform_follow.TransformPoint( target_offset );
 
-            updateMethod = FollowTarget;
-        }
+			var lateralDelta  = GameSettings.Instance.camera_follow_speed_lateral * Time.deltaTime;
+			var verticalDelta = GameSettings.Instance.camera_follow_speed_vertical * Time.deltaTime;
 
-        void LevelCompleteResponse()
-        {
-            updateMethod = ExtensionMethods.EmptyMethod;
-        }
+			targetPosition.x = Mathf.Lerp( position.x, targetPosition.x, lateralDelta );
+			targetPosition.y = Mathf.Lerp( position.y, targetPosition.y, lateralDelta );
+			targetPosition.z = Mathf.Lerp( position.z, targetPosition.z, lateralDelta );
 
-        void FollowTarget()
-        {
-            // Info: Simple follow logic.
-            var player_position = transform_target.position;
-            var target_position = transform_target.position - followOffset;
-
-            target_position.x = 0;
-            target_position.z = Mathf.Lerp( transform.position.z, target_position.z, Time.deltaTime * GameSettings.Instance.camera_follow_speed_depth );
-            transform.position = target_position;
-        }
+			transform.position = targetPosition;
+			// transform.position = Vector3.Lerp( transform.position, targetPosition, Time.deltaTime * GameSettings.Instance.camera_follow_speed_lateral );
+		}
 #endregion
 
 #region Editor Only
 #if UNITY_EDITOR
+		[ Button() ]
+		public void ResetPosition()
+		{
+			var player = GameObject.FindGameObjectWithTag( "Player" ).transform;
+
+			transform.position = player.TransformPoint( GameSettings.Instance.camera_follow_offset * 0.8f );
+			transform.LookAtAxis( player.GetChild( 5 ).position, GameSettings.Instance.camera_look_axis );
+		}
 #endif
 #endregion
-    }
+	}
 }

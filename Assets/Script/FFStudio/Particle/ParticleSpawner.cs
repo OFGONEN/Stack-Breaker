@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using UnityEditor;
+using Sirenix.OdinInspector;
 
 namespace FFStudio
 {
@@ -18,12 +19,20 @@ namespace FFStudio
 #endregion
 
 #region API
+		[ Button() ]
 		public void Spawn( int index )
 		{
 			var data = particleDatas[ index ];
 
+			Vector3 spawnPosition;
+
+			if( data.offset_local )
+				spawnPosition = transform.TransformPoint( data.offset );
+			else
+				spawnPosition = transform.position + data.offset;
+
 			Transform parent = data.parent ? transform : null;
-			data.particle_event.Raise( data.alias, transform.position + data.offset, parent, data.size );
+			data.particle_event.Raise( data.alias, spawnPosition, parent, data.size );
 		}
 #endregion
 
@@ -37,8 +46,16 @@ namespace FFStudio
 			for( var i = 0; i < particleDatas.Length; i++ )
 			{
 				var data = particleDatas[ i ];
-				Handles.Label( transform.position + data.offset, "Particle Spawn:" + data.alias );
-				Handles.DrawWireCube( transform.position + data.offset, Vector3.one / 4f );
+
+				Vector3 spawnPosition;
+
+				if( data.offset_local )
+					spawnPosition = transform.TransformPoint( data.offset );
+				else
+					spawnPosition = transform.position + data.offset;
+
+				Handles.Label( spawnPosition, "Particle Spawn:" + data.alias );
+				Handles.DrawWireCube( spawnPosition, Vector3.one / 4f );
 			}
 		}
 #endif

@@ -13,6 +13,9 @@ namespace FFStudio
 	{
 		public static readonly string SAVE_PATH = Application.persistentDataPath + "/Saves/";
 
+		public static readonly int Layer_Break = 29;
+		public static readonly int Layer_Ground = 30;
+
 		static List< Transform > baseModelBones   = new List< Transform >( 96 );
 		static List< Transform > targetModelBones = new List< Transform >( 96 );
 
@@ -474,6 +477,26 @@ namespace FFStudio
 		public static float ReturnClamped( this Vector2 vector, float value )
 		{
 			return Mathf.Clamp( value, vector.x, vector.y );
+		}
+
+		public static void SetAllChildrenLayer( this Transform parent, int layer )
+		{
+			var childs = parent.GetComponentsInChildren< Transform >();
+
+			for( var i = 0; i < childs.Length; i++ )
+			{
+				childs[ i ].gameObject.layer = layer;
+			}
+		}
+
+		public static void SetAllChildrenLayer( this GameObject parent, int layer )
+		{
+			var childs = parent.GetComponentsInChildren< Transform >();
+
+			for( var i = 0; i < childs.Length; i++ )
+			{
+				childs[ i ].gameObject.layer = layer;
+			}
 		}
 	}
 }

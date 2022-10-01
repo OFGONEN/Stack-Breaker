@@ -10,9 +10,39 @@ namespace FFStudio
     {
 #region Fields (Settings)
     // Info: You can use Title() attribute ONCE for every game-specific group of settings.
-    
+    [ Title( "Player" ) ]
+        [ LabelText( "Player Input Activation Delay" ) ] public float player_input_activation_delay = 0.5f;
+        [ LabelText( "Player Width Range" ) ] public Vector2 player_width_range;
+        [ LabelText( "Player Width Curve" ) ] public AnimationCurve player_width_curve;
+        [ LabelText( "Player Ground Punch Vector" ) ] public Vector3 player_punch_ground_vector = new Vector3( 1, 1 ,1 );
+        [ LabelText( "Player Ground Punch Power" ) ] public float player_punch_ground_power = 1;
+        [ LabelText( "Player Ground Punch Duration" ) ] public float player_punch_ground_duraion = 0.35f;
+        [ LabelText( "Player Ground Punch Ease" ) ] public Ease player_punch_ground_ease = Ease.Linear;
+        [ LabelText( "Player Collectable Punch Vector" ) ] public Vector3 player_punch_collectable_vector = new Vector3( 1, 0 ,1 );
+        [ LabelText( "Player Collectable Punch Power" ) ] public float player_punch_collectable_power = 1;
+        [ LabelText( "Player Collectable Punch Duration" ) ] public float player_punch_collectable_duraion = 0.35f;
+        [ LabelText( "Player Collectable Punch Ease" ) ] public Ease player_punch_collectable_ease = Ease.Linear;
+ 
+        [ LabelText( "Player Level Complete Buffer" ) ] public float player_level_complete_buffer = 0.01f;
+
+    [ Title( "Player Movement" ) ]
+        [ LabelText( "Player Rotation Speed" ) ] public float player_rotation_speed = 1f;
+        [ LabelText( "Player Rotation Speed Cofactor While Jumping" ) ] public float player_movement_rotate_cofactor_jumping = 1f;
+        [ LabelText( "Player Jump Height" ) ] public float player_jump_height = 1f;
+        [ LabelText( "Player Jump Duration" ) ] public float player_jump_duration = 1f;
+        [ LabelText( "Player Jump Ease" ) ] public Ease player_jump_ease = Ease.Linear;
+        [ LabelText( "Player Fall Speed" ) ] public float player_fall_speed = 1f;
+
+    [ Title( "Stack" ) ]
+        [ LabelText( "Stack Break Material" ) ] public Material stack_break_material;
+        [ LabelText( "Stack Ground Material" ) ] public Material stack_ground_material;
+        [ LabelText( "Stack Ground Final Material" ) ] public Material stack_ground_final_material;
+
     [ Title( "Camera" ) ]
-        [ LabelText( "Follow Speed (Z)" ), SuffixLabel( "units/seconds" ), Min( 0 ) ] public float camera_follow_speed_depth = 2.8f;
+        [ LabelText( "Camera Follow Offset" ) ] public Vector3 camera_follow_offset;
+        [ LabelText( "Camera Look Axis" ) ] public Vector3 camera_look_axis;
+        [ LabelText( "Camera Follow Lateral Speed" ) ] public float camera_follow_speed_lateral = 20f;
+        [ LabelText( "Camera Follow Vertical Speed" ) ] public float camera_follow_speed_vertical = 10f;
     
     [ Title( "Project Setup", "These settings should not be edited by Level Designer(s).", TitleAlignments.Centered ) ]
         public int maxLevelCount;
@@ -49,6 +79,11 @@ namespace FFStudio
 
         [ FoldoutGroup( "Debug" ) ] public float debug_ui_text_float_height;
         [ FoldoutGroup( "Debug" ) ] public float debug_ui_text_float_duration;
+#endregion
+
+#region Property
+        public Vector3 PlayerPunchVector_Ground => player_punch_ground_vector * player_punch_ground_power;
+        public Vector3 PlayerPunchVector_Collectable => player_punch_collectable_vector * player_punch_collectable_power;
 #endregion
 
 #region Fields (Singleton Related)

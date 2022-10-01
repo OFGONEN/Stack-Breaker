@@ -9,11 +9,12 @@ namespace FFStudio
     {
 #region Fields
         [ Header( "Fired Events" ) ]
-        public GameEvent levelFailedEvent;
-        public GameEvent levelCompleted;
+        public GameEvent event_level_failed;
+        public GameEvent event_level_completed;
+        public GameEvent event_level_started;
 
         [ Header( "Level Releated" ) ]
-        public SharedFloatNotifier levelProgress;
+        public SharedFloatNotifier notif_level_progress;
 #endregion
 
 #region UnityAPI
@@ -23,7 +24,7 @@ namespace FFStudio
         // Info: Called from Editor.
         public void LevelLoadedResponse()
         {
-			levelProgress.SetValue_NotifyAlways( 0 );
+			notif_level_progress.SetValue_NotifyAlways( 0 );
 
 			var levelData = CurrentLevelData.Instance.levelData;
             // Set Active Scene.
@@ -36,14 +37,28 @@ namespace FFStudio
         // Info: Called from Editor.
         public void LevelRevealedResponse()
         {
-
-        }
+			event_level_started.Raise();
+		}
 
         // Info: Called from Editor.
         public void LevelStartedResponse()
         {
 
         }
+
+        public void OnCylinderReference( object cylinderColorSetter )
+        {
+            if( cylinderColorSetter != null )
+		        ( cylinderColorSetter as ColorSetter ).SetColor( CurrentLevelData.Instance.levelData.cylinder_color );
+		}
+        
+        public void OnStackBreakParticle( ReferenceGameEvent gameEvent )
+        {
+			var particle = gameEvent.eventValue as ParticleSystem;
+            
+            var main            = particle.main;
+                main.startColor = CurrentLevelData.Instance.levelData.particle_stack_break_color;
+		}
 #endregion
 
 #region Implementation

@@ -12,8 +12,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a385bd3b4416492409284c9a366cb52a, type: 3}
   m_Name: game_settings
   m_EditorClassIdentifier: 
-  camera_follow_speed_depth: 2.8
-  maxLevelCount: 1
+  player_input_activation_delay: 0.25
+  player_width_range: {x: 0, y: 70}
+  player_width_curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  player_punch_ground_vector: {x: 1, y: 1, z: 1}
+  player_punch_ground_power: 0.65
+  player_punch_ground_duraion: 0.35
+  player_punch_ground_ease: 1
+  player_punch_collectable_vector: {x: 1, y: 0, z: 1}
+  player_punch_collectable_power: 0.5
+  player_punch_collectable_duraion: 0.35
+  player_punch_collectable_ease: 1
+  player_level_complete_buffer: 0.01
+  player_rotation_speed: -75
+  player_movement_rotate_cofactor_jumping: 0.5
+  player_jump_height: 0.35
+  player_jump_duration: 0.25
+  player_jump_ease: 1
+  player_fall_speed: 7.5
+  stack_break_material: {fileID: 2100000, guid: edb23a0f1cdc64a09b20a50ae8a456d7, type: 2}
+  stack_ground_material: {fileID: 2100000, guid: 4dcc6c4906e7a4610975ac286a5dc538, type: 2}
+  stack_ground_final_material: {fileID: 2100000, guid: 81e5bb1c1e32448ce943ef86ecc9346e, type: 2}
+  camera_follow_offset: {x: 6, y: 4.5, z: 0}
+  camera_look_axis: {x: 1, y: 1, z: 0}
+  camera_follow_speed_lateral: 20
+  camera_follow_speed_vertical: 1
+  maxLevelCount: 10
   useRemoteConfig_GameSettings: 0
   useRemoteConfig_Components: 0
   ui_Entity_Move_TweenDuration: 0.5
