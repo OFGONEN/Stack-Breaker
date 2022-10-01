@@ -17,7 +17,7 @@ MonoBehaviour:
   player_width_ratio: 0
   collectable_cofactor: 0.1
   break_cofactor: 0.1
-  break_color: {r: 1, g: 0.88404834, b: 0, a: 1}
+  break_color: {r: 0.5377358, g: 0.47660428, b: 0.018117782, a: 1}
   ground_color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   ground_final_color: {r: 0.26778114, g: 0.6792453, b: 0.067741424, a: 1}
   cylinder_color: {r: 0.4823984, g: 0.19215685, b: 0.6901961, a: 1}
@@ -82,4 +82,4 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     m_ColorMin: {r: 0, g: 0, b: 0, a: 0}
-    m_ColorMax: {r: 1, g: 0.88235295, b: 0, a: 1}
+    m_ColorMax: {r: 0.5372549, g: 0.47843137, b: 0.019607844, a: 1}
