@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
 			StartMovement();
 
 
-		FFLogger.PopUpText( transform.position + Vector3.up, "Ground Trigger" );
+		// FFLogger.PopUpText( transform.position + Vector3.up, "Ground Trigger" );
 	}
 
 	public void OnTrigger_Break( Collider collider )
@@ -148,7 +148,7 @@ public class Player : MonoBehaviour
 		else
 			StartMovement();
 
-		FFLogger.PopUpText( transform.position + Vector3.up, "Break Trigger" );
+		// FFLogger.PopUpText( transform.position + Vector3.up, "Break Trigger" );
 	}
 #endregion
 
@@ -295,7 +295,7 @@ public class Player : MonoBehaviour
 
 		// disable gfx object
 		_skinnedMeshRenderer.enabled = false;
-		FFLogger.PopUpText( transform.position + Vector3.up / 2f, "Level Failed" );
+		// FFLogger.PopUpText( transform.position + Vector3.up / 2f, "Level Failed" );
 		_particleSpawnner.Spawn( 0 ); 
 
 		event_level_failed.Raise();
